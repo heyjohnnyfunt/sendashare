@@ -1,0 +1,55 @@
+/* font-family: "MyriadProRegular"; */
+@import "local-paths";
+
+@font-face {
+  font-family: "MyriadProRegular";
+  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot");
+  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
+  url($fonts_path + "MyriadProRegular/MyriadProRegular.woff") format("woff"),
+  url($fonts_path + "MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* font-family: "MyriadProBold"; */
+@font-face {
+  font-family: "MyriadProBold";
+  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot");
+  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot?#iefix")format("embedded-opentype"),
+  url($fonts_path + "MyriadProBold/MyriadProBold.woff") format("woff"),
+  url($fonts_path + "MyriadProBold/MyriadProBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* font-family: "PFSquareSansProMedium"; */
+@font-face {
+  font-family: "PFSquareSansProMedium";
+  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.eot");
+  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.eot?#iefix")format("embedded-opentype"),
+  url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.woff") format("woff"),
+  url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* font-family: "PFSquareSansProLight"; */
+@font-face {
+  font-family: "PFSquareSansProLight";
+  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProLight.ttf");
+  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProLight.ttf?#iefix") format("embedded-opentype"),
+  url($fonts_path + "PFSquareSansProMedium/PFSquareSansProLight.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* font-family: "MyriadProLight"; */
+@font-face {
+  font-family: "MyriadProLight";
+  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf");
+  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf?#iefix")format("embedded-opentype"),
+  url($fonts_path + "MyriadProRegular/MyriadProLight.otf") format("otf"),
+  url($fonts_path + "MyriadProRegular/MyriadProLight.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}

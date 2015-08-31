@@ -1,0 +1,1 @@
+<link rel="stylesheet" type="text/css" href="<?echo Config::get('URL'); ?>/css/style.css">
