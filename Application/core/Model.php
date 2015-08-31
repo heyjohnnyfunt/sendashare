@@ -6,10 +6,10 @@
  * Time: 21:19
  */
 
-namespace Models;
-
 
 class Model
 {
-
+    public static function isLoggedIn(){
+        return Session::userIsLoggedIn();
+    }
 }

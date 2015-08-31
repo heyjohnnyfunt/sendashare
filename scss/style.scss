@@ -1,20 +1,21 @@
 @import "local-paths";
+@import "long-shadow";
 @import "fonts";
 @import "vars";
-@import "cols";
+@import "strap";
 
-html{
+html {
   -webkit-font-smoothing: antialiased;
   font-family: "MyriadProLight", Helvetica, Arial, sans-serif;
   height: 100%;
 }
 
-body{
+body {
   margin: 0;
   height: 100%;
 }
 
-@mixin centered($x, $y){
+@mixin centered($x, $y) {
   position: absolute;
   left: $x;
   top: $y;
@@ -31,8 +32,8 @@ body{
   transition: all 0.25s ease-in-out;
 }
 
-@mixin strict_white_border{
-  border: 1px solid white;
+@mixin strict_border($color) {
+  border: 1px solid $color;
   border-radius: 2px;
 }
 
@@ -53,26 +54,28 @@ body{
   }
 }
 
-.form-group{
+.form-group {
   margin-bottom: 15px;
 }
 
-.form-control{
+.form-control {
   display: block;
   width: 100%;
   height: 34px;
+
+  box-sizing: border-box;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: $font-normal;
   line-height: 1.42857143;
-  color: #555;
+  color: $blue-darker;
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   &:focus {
     border-color: $red-light;
     outline: 0;
@@ -87,16 +90,16 @@ body{
   border-radius: 2px;
   font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
   padding: 6px 12px;
-  font-size: 16px;
+  font-size: $font-normal;
   cursor: pointer;
 
   &.btn-sm {
     letter-spacing: 0;
-    font-size: 14px;
+    font-size: $font-small;
     padding: 2px 20px;
   }
   &.btn-lg {
-    font-size: 19px;
+    font-size: $font-big;
   }
 
   &.btn-default {
@@ -127,9 +130,12 @@ body{
     }
   }
 }
+input[type=checkbox] {
 
-/*input[type=checkbox] {
-  /!* Base for label styling *!/
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1.0, 1.0);
+
+  /* Base for label styling */
   &:not(:checked),
   &:checked {
     visibility: hidden;
@@ -142,40 +148,40 @@ body{
     cursor: pointer;
   }
 
-  /!* checkbox aspect *!/
+  /* checkbox aspect */
   &:not(:checked) + label:before,
   &:checked + label:before {
     content: '';
     position: absolute;
     left: 0;
-    top: 2px;
+    top: 0;
     width: 15px;
     height: 15px;
     border: 1px solid #9a9a9a;
     border-radius: 0;
     box-shadow: inset 1px 1px 2px rgba(0, 0, 0, .3)
   }
-  /!* checked mark aspect *!/
+  /* checked mark aspect */
   &:not(:checked) + label:after,
   &:checked + label:after {
     content: '✔';
     position: absolute;
-    top: 1px;
+    top: 0;
     left: 3px;
     font-size: 13px;
     color: $blue;
     transition: all .2s;
   }
-  /!* checked mark aspect changes *!/
+  /* checked mark aspect changes */
   &:not(:checked) + label:after {
     opacity: 0;
-    transform: scale(0);
+    //transform: scale(0);
   }
   &:checked + label:after {
     opacity: 1;
-    transform: scale(1);
+    //transform: scale(1);
   }
-  /!* disabled checkbox *!/
+  /* disabled checkbox */
   &:disabled:not(:checked) + label:before,
   &:disabled:checked + label:before {
     box-shadow: none;
@@ -188,53 +194,58 @@ body{
   &:disabled + label {
     color: #aaa;
   }
-  /!* accessibility *!/
+  /* accessibility */
   &:checked:focus + label:before,
   &:not(:checked):focus + label:before {
     border: 1px solid $blue;
   }
-}*/
+}
 
-a{
+a {
   @include transition;
   text-decoration: none;
   color: white;
-  &:hover{
+  &:hover {
     color: $blue;
   }
 }
 
-.login-container{
+.login-container {
   width: 100%;
   height: 100%;
   position: relative;
-  background: black;
+  //background: black;
 }
 
-.login-page{
+.login-page {
   @include centered(40%, 50%);
-  @include strict_white_border;
+  @include strict_border(white);
   color: black;
   background: white;
   width: 50%;
   padding: 20px;
 
-  h1{color: $red-light}
+  h1 {
+    color: $red-light;
+  }
 
-  form{
+  form {
 
-    label.lg-label{
+    label.lg-label {
       font-size: 24px;
       font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
     }
 
-    input{
-      @include strict_white_border;
+    input:not([type=checkbox]) {
       @include placeholder-color($gray-light);
-      height: 30px;
+      height: 50px;
       font-size: 18px;
-      padding: 6px 12px;
       font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    button{
+      font-size: 22px;
     }
   }
 }

@@ -8,7 +8,7 @@
 
 //namespace App;
 
-include(dirname(realpath(__DIR__)) . '/core/Controller.php');
+require_once(dirname(realpath(__DIR__)) . '/core/Controller.php');
 
 class IndexController extends Controller
 {

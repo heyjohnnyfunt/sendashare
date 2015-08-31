@@ -22,13 +22,20 @@ class Application
     private $action;
     private $params = array();
 
-
     function __construct()
     {
         $this->parse_url();
         $this->check_url();
 
-        require Config::get('CONTROLLERS_PATH') . $this->controller_name . '.php';
+        require_once('Auth.php');
+        require_once('Controller.php');
+        require_once('Database.php');
+        require_once('Redirect.php');
+        require_once('Request.php');
+        require_once('Session.php');
+        require_once('View.php');
+        require_once(Config::get('CONTROLLERS_PATH') . $this->controller_name . '.php');
+
         $this->controller = new $this->controller_name();
 
         if (method_exists($this->controller, $this->action)) {
@@ -67,6 +74,7 @@ class Application
 
     private function check_url()
     {
+//        require_once(Config::get('MODELS_PATH') . ucwords($this->controller_name) . 'Model.php');
         $this->controller_name = ucwords($this->controller_name . 'Controller');
         if (!file_exists(Config::get('CONTROLLERS_PATH') . $this->controller_name . '.php')) {
             $this->controller_name = 'IndexController';

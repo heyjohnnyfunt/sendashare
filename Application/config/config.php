@@ -13,6 +13,12 @@ DEFINE('BASE_PATH', dirname(dirname(realpath(__DIR__))) . '/');
 
 return array(
     'URL' => '//' . $_SERVER['HTTP_HOST'],
+    'COOKIE_PATH' => '/',
+
+    'DB_NAME' => 'sendashare',
+    'DB_HOST' => 'localhost',
+    'DB_USER' => 'mysql',
+    'DB_PASS' => 'mysql',
 
     'APP_PATH' => APP_PATH,
     'CONFIG_PATH' => APP_PATH . 'config/',

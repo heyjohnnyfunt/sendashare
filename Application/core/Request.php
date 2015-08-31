@@ -14,6 +14,11 @@ class Request
         return isset($_GET[$key]) ? $_GET[$key] : NULL;
     }
 
+    public static function get_post($key, $clean = false)
+    {
+        return isset($_POST[$key]) ? ($clean ? trim(strip_tags($_POST[$key])) : $_POST[$key]) : NULL;
+    }
+
     public static function get_cookie($key)
     {
         return isset($_COOKIE[$key]) ? $_COOKIE[$key] : NULL;

@@ -8,9 +8,6 @@
 
 //namespace App;
 
-require('Session.php');
-require('Request.php');
-require('View.php');
 
 class Controller
 {
@@ -22,7 +19,7 @@ class Controller
         Session::init();
 
         // user is not logged in but has remember-me-cookie ? then try to login with cookie ("remember me" feature)
-        if (!Session::userIsLoggedIn() AND Request::get_cookie('remember_me')) {
+        if (!Session::userIsLoggedIn() AND Request::get_cookie('remember_me') !== NULL) {
 //            header('location: ' . Config::get('URL') . 'login');
             echo '<p>User is not logged in</p>';
         }

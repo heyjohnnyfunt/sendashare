@@ -7,14 +7,12 @@
  */
 
 //namespace App;
-//use App\Controller;
-
-include(dirname(realpath(__DIR__)) . '/core/Controller.php');
 
 class AccountController extends Controller
 {
     public function __construct(){
         parent::__construct();
+        Auth::checkAuth();
     }
 
     public function index(){
