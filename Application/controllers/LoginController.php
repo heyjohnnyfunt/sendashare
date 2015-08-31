@@ -22,7 +22,7 @@ class LoginController extends Controller
         if (LoginModel::isLoggedIn()) {
             Redirect::toPath('account');
         } else {
-            $data = array('redirect' => Request::get_get('redirect') ? Request::get_get('redirect') : NULL);
+            $data = array('redirect' => Request::get_get('redirect') != NULL ? Request::get_get('redirect') : NULL);
             $this->View->render('login/login', $data);
         }
     }
@@ -38,15 +38,15 @@ class LoginController extends Controller
             if ($redirect = Request::get_post('redirect')) {
                 Redirect::toPath(ltrim(urldecode($redirect), '/'));
             } else {
-                Redirect::toPath('account');
+                Redirect::toPath('index');
             }
         } else {
-            Redirect::toPath('login/index');
+            Redirect::toPath('login');
         }
     }
 
     public function logout(){
         LoginModel::logout();
-        Redirect::home();
+        Redirect::toPath('login');
     }
 }

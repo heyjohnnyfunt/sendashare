@@ -127,6 +127,7 @@ body {
     &:hover {
       background-color: white;
       color: $red-light;
+      box-shadow: 5px 5px 10px #cf4646;
     }
   }
 }

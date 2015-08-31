@@ -17,7 +17,9 @@
                 <!--                <label for="password" class="lg-label">Password: </label>-->
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
             </div>
-
+            <?php if (!empty($this->redirect)) { ?>
+                <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />
+            <?php } ?>
             <input type="checkbox" id="remember_me" name="remember_me">
             <label for="remember_me">Remember me</label>
 

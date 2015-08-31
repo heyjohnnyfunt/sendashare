@@ -10,6 +10,13 @@
 //namespace App;
 
 require_once('Config.php');
+require_once('Auth.php');
+require_once('Controller.php');
+require_once('Database.php');
+require_once('Redirect.php');
+require_once('Request.php');
+require_once('Session.php');
+require_once('View.php');
 
 /*function __autoload($class){
     require_once($class.'.php');
@@ -27,13 +34,6 @@ class Application
         $this->parse_url();
         $this->check_url();
 
-        require_once('Auth.php');
-        require_once('Controller.php');
-        require_once('Database.php');
-        require_once('Redirect.php');
-        require_once('Request.php');
-        require_once('Session.php');
-        require_once('View.php');
         require_once(Config::get('CONTROLLERS_PATH') . $this->controller_name . '.php');
 
         $this->controller = new $this->controller_name();
@@ -56,11 +56,10 @@ class Application
 
     private function parse_url()
     {
-        /*if(Request::get_get('url') == NULL){
-            var_dump($_GET);
+        if(Request::get_get('url') == NULL){
             return;
-        }*/
-        $url = trim($_SERVER['REQUEST_URI'], '/');
+        }
+        $url = trim(Request::get_get('url'), '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
         $url = explode('/', $url);
 
@@ -80,7 +79,7 @@ class Application
             $this->controller_name = 'IndexController';
         }
 
-        if ($this->action == NULL) {
+        if ($this->action == NULL OR (strlen($this->action) == 0)) {
             $this->action = 'index';
         }
 
