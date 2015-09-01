@@ -16,6 +16,6 @@ class AccountController extends Controller
     }
 
     public function index(){
-        $this->View->render('index');
+        $this->View->render('account/index');
     }
 }

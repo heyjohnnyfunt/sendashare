@@ -13,6 +13,7 @@ require_once('Config.php');
 require_once('Auth.php');
 require_once('Controller.php');
 require_once('Database.php');
+require_once('Message.php');
 require_once('Redirect.php');
 require_once('Request.php');
 require_once('Session.php');

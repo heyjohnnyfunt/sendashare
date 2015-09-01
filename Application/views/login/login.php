@@ -11,11 +11,11 @@
         <form action="<?php echo Config::get('URL'); ?>/login/login" method="post">
             <div class="form-group">
                 <!--                <label for="username" class="lg-label">Username: </label>-->
-                <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username or E-mail" required>
             </div>
             <div class="form-group">
                 <!--                <label for="password" class="lg-label">Password: </label>-->
-                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
             </div>
             <?php if (!empty($this->redirect)) { ?>
                 <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />

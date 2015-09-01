@@ -5,7 +5,6 @@
  * Date: 30.08.2015
  * Time: 17:16
  */
-
 //namespace App;
 
 class Session
@@ -29,6 +28,11 @@ class Session
     public static function get($key)
     {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : NULL;
+    }
+
+    public static function add($key, $value)
+    {
+        $_SESSION[$key][] = $value;
     }
 
     public static function userIsLoggedIn()

@@ -38,15 +38,16 @@ class LoginController extends Controller
             if ($redirect = Request::get_post('redirect')) {
                 Redirect::toPath(ltrim(urldecode($redirect), '/'));
             } else {
-                Redirect::toPath('index');
+                Redirect::toPath('account');
             }
         } else {
             Redirect::toPath('login');
+//            var_dump(Session::get(Message::get('LOGIN_FAILED')));
         }
     }
 
     public function logout(){
         LoginModel::logout();
-        Redirect::toPath('login');
+        Redirect::home();
     }
 }

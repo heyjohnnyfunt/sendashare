@@ -20,6 +20,9 @@ class Config
                 return false;
             }
             self::$config = require $config_file;
+            if (!array_key_exists($key, self::$config)) {
+                return false;
+            }
         }
         return self::$config[$key];
     }

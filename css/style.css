@@ -147,6 +147,9 @@ body {
   margin: 0;
   height: 100%; }
 
+*:focus {
+  outline: 0; }
+
 .form-group {
   margin-bottom: 15px; }
 
@@ -286,11 +289,11 @@ a {
 
 .login-page {
   position: absolute;
-  left: 40%;
+  left: 50%;
   top: 50%;
-  -webkit-transform: translate(-40%, -50%);
-  -ms-transform: translate(-40%, -50%);
-  transform: translate(-40%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   border: 1px solid white;
   border-radius: 2px;
   color: black;
