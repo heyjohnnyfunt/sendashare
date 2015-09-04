@@ -8,8 +8,13 @@ $gray:                  #797979;
 $gray-light:            #7f8999;
 $gray-lighter:          #d7ddea;
 
+$red:                   darken(#cf4646, 10);
 $red-light:             #cf4646;
 
 $font-small:            14px;
 $font-normal:           16px;
 $font-big:              18px;
+
+$small-screen:          768px;
+$medium-screen:         992px;
+$large-screen:          1200px;

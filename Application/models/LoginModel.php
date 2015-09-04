@@ -15,7 +15,7 @@ class LoginModel
         return Session::userIsLoggedIn();
     }
 
-    public static function login($username, $password, $set_remember_me_cookie = null)
+    public static function login($username, $password, $remember_me_cookie = null)
     {
         if (empty($username) OR empty($password)) {
             return false;
@@ -24,15 +24,24 @@ class LoginModel
         $result = self::validateUser($username, $password);
 
         if (!$result) {
+            Session::add(Message::get('LOGIN_FAILED'), Message::get('NO_USER'));
             return false;
-
-        } else {
-            Session::set('user_logged_in', true);
-            /*foreach ($result as $key) {
-                echo '<p>' . $key . '</p>';
-            }*/
-            return true;
         }
+
+        Session::set('user_logged_in', true);
+
+        if ($result['failed_login_count'] > 0) {
+            self::resetLoginFail($result['username']);
+        }
+
+        if($remember_me_cookie){
+            self::rememberMe($result['id']);
+        }
+
+        self::setSessionProperties($result['id'], $result['username'], $result['email']);
+
+        return true;
+
     }
 
     private static function validateUser($username, $password)
@@ -85,14 +94,72 @@ class LoginModel
                 WHERE
                   (username = ? OR email = ?) LIMIT 1")
         ) {
-            $query->bind_param('sss',time(), $username, $username);
+            $query->bind_param('sss', time(), $username, $username);
 //            $params = array(time(), &$username, &$username);
 //            call_user_func_array(array($query, "bind_param"), array_merge(array('sss'), $params));
             $query->execute();
-            if($query->errno){
+            if ($query->errno) {
                 Session::add(Message::get('LOGIN_FAILED'), Message::get('DB_ERROR'));
             }
+        } else {
+            Session::add(Message::get('LOGIN_FAILED'), Message::get('DB_ERROR'));
         }
+    }
+
+    private static function resetLoginFail($username)
+    {
+        $db = Database::getDb()->connect();
+        if ($query = $db->prepare("UPDATE
+                    users
+                SET
+                  failed_login_count = 0,
+                  last_failed_login = NULL
+                WHERE
+                  (username = ? OR email = ?) AND users.failed_login_count != 0 LIMIT 1")
+        ) {
+            $query->bind_param('ss', $username, $username);
+            $query->execute();
+            if ($query->errno) {
+                Session::add(Message::get('LOGIN_FAILED'), Message::get('DB_ERROR'));
+            }
+        } else {
+            Session::add(Message::get('LOGIN_FAILED'), Message::get('DB_ERROR'));
+        }
+    }
+
+    public static function rememberMe($user_id)
+    {
+        $random_token = hash('sha256', openssl_random_pseudo_bytes(16));
+
+        $db = Database::getDb()->connect();
+
+        if($query = $db->prepare("UPDATE
+                users
+            SET
+              remember_me_token = ?
+            WHERE
+              id = ?
+            LIMIT 1
+        ")){
+            $query->bind_param('ss', $random_token, $user_id);
+            $query->execute();
+            if ($query->errno) {
+                Session::add(Message::get('LOGIN_FAILED'), Message::get('DB_ERROR'));
+            }
+        } else {
+            Session::add(Message::get('LOGIN_FAILED'), Message::get('DB_ERROR'));
+            return;
+        }
+
+        $cookie_string = $user_id . ':' . $random_token;
+        $cookie_string =  $cookie_string . ':' . hash('sha256', $cookie_string);
+        setcookie('remember_me', $cookie_string, time() + Config::get('COOKIE_EXPIRE'), Config::get('COOKIE_PATH'));
+    }
+
+    public static function setSessionProperties($user_id, $username, $email){
+        Session::set('user_id', $user_id);
+        Session::set('user_name', $username);
+        Session::set('user_email', $email);
 
     }
 

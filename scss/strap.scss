@@ -1,3 +1,5 @@
+@import "vars";
+
 $rows: 12;
 
 @mixin col($x){
@@ -45,6 +47,15 @@ $rows: 12;
   @include col(12);
 }
 
+.clearfix{
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+  }
+}
+
 .pull-right{
   float: right;
 }
@@ -62,4 +73,174 @@ $rows: 12;
 }
 .text-center{
   text-align: center;
+}
+
+.container {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: $small-screen) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: $medium-screen) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: $large-screen) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+
+  box-sizing: border-box;
+  padding: 6px 12px;
+  font-size: $font-normal;
+  line-height: 1.42857143;
+  color: $blue-darker;
+  background: #fff;
+  border: 1px solid $gray;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  &:focus {
+    border-color: $red-light;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($red-light, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($red-light, .6);
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 2px;
+  font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+  padding: 6px 12px;
+  font-size: $font-normal;
+  cursor: pointer;
+
+  &.btn-sm {
+    letter-spacing: 0;
+    font-size: $font-small;
+    padding: 2px 20px;
+  }
+  &.btn-lg {
+    font-size: $font-big;
+  }
+
+  &.btn-default {
+    border: 2px solid black;
+    background: white;
+    color: black;
+    &:hover {
+      background-color: black;
+      color: white;
+      border-color: white;
+    }
+  }
+
+  &.btn-shadow {
+    width: 100%;
+    -webkit-box-shadow: 0 1px 0 0 #bac2c9;
+    -moz-box-shadow: 0 1px 0 0 #bac2c9;
+    box-shadow: 0 1px 0 0 #bac2c9;
+  }
+
+  &.btn-danger {
+    border: 2px solid $red-light;
+    background: $red-light;
+    color: white;
+    &:hover {
+      background-color: white;
+      color: $red-light;
+      box-shadow: 5px 5px 10px #cf4646;
+    }
+  }
+}
+
+input[type=checkbox] {
+
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1.0, 1.0);
+
+  /* Base for label styling */
+  &:not(:checked),
+  &:checked {
+    visibility: hidden;
+    width: 0;
+  }
+  &:not(:checked) + label,
+  &:checked + label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+
+  /* checkbox aspect */
+  &:not(:checked) + label:before,
+  &:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #9a9a9a;
+    border-radius: 0;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, .3)
+  }
+  /* checked mark aspect */
+  &:not(:checked) + label:after,
+  &:checked + label:after {
+    content: '✔';
+    position: absolute;
+    top: 0;
+    left: 3px;
+    font-size: 13px;
+    color: $blue;
+    transition: all .2s;
+  }
+  /* checked mark aspect changes */
+  &:not(:checked) + label:after {
+    opacity: 0;
+    //transform: scale(0);
+  }
+  &:checked + label:after {
+    opacity: 1;
+    //transform: scale(1);
+  }
+  /* disabled checkbox */
+  &:disabled:not(:checked) + label:before,
+  &:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+  }
+  &:disabled:checked + label:after {
+    color: #999;
+  }
+  &:disabled + label {
+    color: #aaa;
+  }
+  /* accessibility */
+  &:checked:focus + label:before,
+  &:not(:checked):focus + label:before {
+    border: 1px solid $blue;
+  }
 }

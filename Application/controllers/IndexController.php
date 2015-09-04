@@ -14,6 +14,8 @@ class IndexController extends Controller
 {
     public function __construct(){
         parent::__construct();
+
+        Auth::checkAuth();
     }
 
     public function index(){

@@ -31,7 +31,7 @@ class LoginController extends Controller
     {
         // perform the login method, put result (true or false) into $login_successful
         $login_successful = LoginModel::login(
-            Request::get_post('username'), Request::get_post('password'), Request::get_post('set_remember_me_cookie')
+            Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
         );
         // check login status: if true, then redirect user login/showProfile, if false, then to login form again
         if ($login_successful) {
@@ -42,7 +42,6 @@ class LoginController extends Controller
             }
         } else {
             Redirect::toPath('login');
-//            var_dump(Session::get(Message::get('LOGIN_FAILED')));
         }
     }
 

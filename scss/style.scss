@@ -1,7 +1,7 @@
 @import "local-paths";
+@import "vars";
 @import "long-shadow";
 @import "fonts";
-@import "vars";
 @import "strap";
 
 html {
@@ -14,7 +14,14 @@ body {
   margin: 0;
   height: 100%;
 }
+
+*{
+  box-sizing: border-box;
+}
+
 *:focus {outline:0;}
+
+// Mixins
 
 @mixin centered($x, $y) {
   position: absolute;
@@ -26,11 +33,11 @@ body {
 }
 
 @mixin transition {
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -ms-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ;
+  -moz-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s ;
 }
 
 @mixin strict_border($color) {
@@ -55,181 +62,65 @@ body {
   }
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: 34px;
-
-  box-sizing: border-box;
-  padding: 6px 12px;
-  font-size: $font-normal;
-  line-height: 1.42857143;
-  color: $blue-darker;
-  background: #fff;
-  border: 1px solid $gray;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  &:focus {
-    border-color: $red-light;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($red-light, .6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($red-light, .6);
+@mixin red-h1{
+  h1 {
+    color: $red-light;
   }
 }
 
-.btn {
+.btn{
   @include transition;
-  border: none;
-  border-radius: 2px;
-  font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
-  padding: 6px 12px;
-  font-size: $font-normal;
-  cursor: pointer;
-
-  &.btn-sm {
-    letter-spacing: 0;
-    font-size: $font-small;
-    padding: 2px 20px;
-  }
-  &.btn-lg {
-    font-size: $font-big;
-  }
-
-  &.btn-default {
-    border: 2px solid black;
-    background: white;
-    color: black;
-    &:hover {
-      background-color: black;
-      color: white;
-      border-color: white;
-    }
-  }
-
-  &.btn-shadow {
-    width: 100%;
-    -webkit-box-shadow: 0 1px 0 0 #bac2c9;
-    -moz-box-shadow: 0 1px 0 0 #bac2c9;
-    box-shadow: 0 1px 0 0 #bac2c9;
-  }
-
-  &.btn-danger {
-    border: 2px solid $red-light;
-    background: $red-light;
-    color: white;
-    &:hover {
-      background-color: white;
-      color: $red-light;
-      box-shadow: 5px 5px 10px #cf4646;
-    }
-  }
-}
-input[type=checkbox] {
-
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translateZ(0) scale(1.0, 1.0);
-
-  /* Base for label styling */
-  &:not(:checked),
-  &:checked {
-    visibility: hidden;
-    width: 0;
-  }
-  &:not(:checked) + label,
-  &:checked + label {
-    position: relative;
-    padding-left: 25px;
-    cursor: pointer;
-  }
-
-  /* checkbox aspect */
-  &:not(:checked) + label:before,
-  &:checked + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 15px;
-    height: 15px;
-    border: 1px solid #9a9a9a;
-    border-radius: 0;
-    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, .3)
-  }
-  /* checked mark aspect */
-  &:not(:checked) + label:after,
-  &:checked + label:after {
-    content: '✔';
-    position: absolute;
-    top: 0;
-    left: 3px;
-    font-size: 13px;
-    color: $blue;
-    transition: all .2s;
-  }
-  /* checked mark aspect changes */
-  &:not(:checked) + label:after {
-    opacity: 0;
-    //transform: scale(0);
-  }
-  &:checked + label:after {
-    opacity: 1;
-    //transform: scale(1);
-  }
-  /* disabled checkbox */
-  &:disabled:not(:checked) + label:before,
-  &:disabled:checked + label:before {
-    box-shadow: none;
-    border-color: #bbb;
-    background-color: #ddd;
-  }
-  &:disabled:checked + label:after {
-    color: #999;
-  }
-  &:disabled + label {
-    color: #aaa;
-  }
-  /* accessibility */
-  &:checked:focus + label:before,
-  &:not(:checked):focus + label:before {
-    border: 1px solid $blue;
-  }
 }
 
 a {
   @include transition;
   text-decoration: none;
-  color: white;
+  color: $gray-darker;
   &:hover {
-    color: $blue;
+    color: $red-light;
   }
 }
 
-.login-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  //background: black;
+.logo{
+  @include red-h1;
+  display: inline-block;
+  float: left;
+  h1:hover{
+    color: $red;
+  }
+}
+
+.navbar{
+  .nav{
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    float: right;
+    li{
+      float: left;
+      padding: 0 20px;
+      >a{
+        font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+        font-size: $font-big;
+        display: block;
+        line-height: 70px;
+        &:hover{
+          border-bottom: 2px solid $red-light;
+        }
+      }
+    }
+  }
 }
 
 .login-page {
   @include centered(50%, 50%);
   @include strict_border(white);
+  @include red-h1;
+
   color: black;
   background: white;
   width: 50%;
   padding: 20px;
-
-  h1 {
-    color: $red-light;
-  }
 
   form {
 
@@ -250,4 +141,14 @@ a {
       font-size: 22px;
     }
   }
+}
+
+@media (min-width: $small-screen){
+  @import "breakpoints/small";
+}
+@media (min-width: $medium-screen){
+  @import "breakpoints/medium";
+}
+@media (min-width: $large-screen){
+  @import "breakpoints/large";
 }

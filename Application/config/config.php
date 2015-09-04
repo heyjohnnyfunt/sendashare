@@ -13,6 +13,7 @@ DEFINE('BASE_PATH', dirname(dirname(realpath(__DIR__))) . '/');
 
 return array(
     'URL' => '//' . $_SERVER['HTTP_HOST'],
+    'COOKIE_EXPIRE' => 60*60*24*30, //30 days
     'COOKIE_PATH' => '/',
 
     'DB_NAME' => 'sendashare',

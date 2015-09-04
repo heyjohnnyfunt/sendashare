@@ -123,6 +123,12 @@
   position: relative;
   float: left; }
 
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0; }
+
 .pull-right {
   float: right; }
 
@@ -138,17 +144,23 @@
 .text-center {
   text-align: center; }
 
-html {
-  -webkit-font-smoothing: antialiased;
-  font-family: "MyriadProLight", Helvetica, Arial, sans-serif;
-  height: 100%; }
+.container {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: auto;
+  margin-left: auto; }
 
-body {
-  margin: 0;
-  height: 100%; }
+@media (min-width: 768px) {
+  .container {
+    width: 750px; } }
 
-*:focus {
-  outline: 0; }
+@media (min-width: 992px) {
+  .container {
+    width: 970px; } }
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px; } }
 
 .form-group {
   margin-bottom: 15px; }
@@ -177,11 +189,6 @@ body {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(207, 70, 70, 0.6); }
 
 .btn {
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -ms-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
   border: none;
   border-radius: 2px;
   font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
@@ -271,21 +278,62 @@ input[type=checkbox] {
   input[type=checkbox]:not(:checked):focus + label:before {
     border: 1px solid #5f9ed3; }
 
-a {
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -ms-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
-  text-decoration: none;
-  color: white; }
-  a:hover {
-    color: #5f9ed3; }
+html {
+  -webkit-font-smoothing: antialiased;
+  font-family: "MyriadProLight", Helvetica, Arial, sans-serif;
+  height: 100%; }
 
-.login-container {
-  width: 100%;
-  height: 100%;
-  position: relative; }
+body {
+  margin: 0;
+  height: 100%; }
+
+* {
+  box-sizing: border-box; }
+
+*:focus {
+  outline: 0; }
+
+.btn {
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s; }
+
+a {
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s;
+  text-decoration: none;
+  color: #2f2f2f; }
+  a:hover {
+    color: #cf4646; }
+
+.logo {
+  display: inline-block;
+  float: left; }
+  .logo h1 {
+    color: #cf4646; }
+  .logo h1:hover {
+    color: #b32f2f; }
+
+.navbar .nav {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  float: right; }
+  .navbar .nav li {
+    float: left;
+    padding: 0 20px; }
+    .navbar .nav li > a {
+      font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      display: block;
+      line-height: 70px; }
+      .navbar .nav li > a:hover {
+        border-bottom: 2px solid #cf4646; }
 
 .login-page {
   position: absolute;

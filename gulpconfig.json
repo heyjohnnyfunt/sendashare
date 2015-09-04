@@ -1,4 +1,9 @@
 {
+  "nm": "./node_modules/",
+
   "css": "./css/",
-  "scss": "./scss/"
+  "scss": "./scss/",
+
+  "bower" : "./bower_components/",
+  "js" : "./js/"
 }

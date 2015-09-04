@@ -8,7 +8,7 @@
 <div class="login-container">
     <div class="login-page">
         <h1>SendaShare</h1>
-        <form action="<?php echo Config::get('URL'); ?>/login/login" method="post">
+        <form id="login" action="<?php echo Config::get('URL'); ?>/login/login" method="post">
             <div class="form-group">
                 <!--                <label for="username" class="lg-label">Username: </label>-->
                 <input type="text" name="username" id="username" class="form-control" placeholder="Username or E-mail" required>
