@@ -8,6 +8,7 @@
  */
 
 require_once(Config::get('MODELS_PATH') . 'LoginModel.php');
+require_once(Config::get('MODELS_PATH') . 'RegistrationModel.php');
 
 class LoginController extends Controller
 {
@@ -29,11 +30,10 @@ class LoginController extends Controller
 
     public function login()
     {
-        // perform the login method, put result (true or false) into $login_successful
         $login_successful = LoginModel::login(
             Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
         );
-        // check login status: if true, then redirect user login/showProfile, if false, then to login form again
+
         if ($login_successful) {
             if ($redirect = Request::get_post('redirect')) {
                 Redirect::toPath(ltrim(urldecode($redirect), '/'));
@@ -45,7 +45,47 @@ class LoginController extends Controller
         }
     }
 
-    public function logout(){
+    public function registration()
+    {
+        if (LoginModel::isLoggedIn()) {
+            Redirect::toPath('account');
+        } else {
+            $data = array('redirect' => Request::get_get('redirect') != NULL ? Request::get_get('redirect') : NULL);
+            $this->View->render('login/register', $data);
+        }
+    }
+
+    public function register()
+    {
+        if (RegistrationModel::register()) {
+            if ($redirect = Request::get_post('redirect')) {
+                Redirect::toPath(ltrim(urldecode($redirect), '/'));
+            } else {
+                Redirect::toPath('login');
+            }
+        } else {
+            Redirect::toPath('login/registration');
+        }
+    }
+
+    public function ajaxCheck(){
+        $login_successful = LoginModel::login(
+            Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
+        );
+
+        if ($login_successful) {
+            if ($redirect = Request::get_post('redirect')) {
+                echo (ltrim(urldecode($redirect), '/'));
+            } else {
+                echo ('account');
+            }
+        } else {
+            echo ('login');
+        }
+    }
+
+    public function logout()
+    {
         LoginModel::logout();
         Redirect::home();
     }

@@ -47,7 +47,7 @@ $rows: 12;
   @include col(12);
 }
 
-.clearfix{
+.form-group, .clearfix{
   &:after{
     content: '';
     display: block;

@@ -15,11 +15,13 @@ body {
   height: 100%;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
-*:focus {outline:0;}
+*:focus {
+  outline: 0;
+}
 
 // Mixins
 
@@ -33,11 +35,11 @@ body {
 }
 
 @mixin transition {
-  -webkit-transition: all 0.25s ;
+  -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
   -ms-transition: all 0.25s;
   -o-transition: all 0.25s;
-  transition: all 0.25s ;
+  transition: all 0.25s;
 }
 
 @mixin strict_border($color) {
@@ -62,13 +64,14 @@ body {
   }
 }
 
-@mixin red-h1{
-  h1 {
-    color: $red-light;
+h1 {
+  color: $red-light;
+  &:hover {
+    color: $red;
   }
 }
 
-.btn{
+.btn {
   @include transition;
 }
 
@@ -81,30 +84,27 @@ a {
   }
 }
 
-.logo{
-  @include red-h1;
+.logo {
   display: inline-block;
   float: left;
-  h1:hover{
-    color: $red;
-  }
 }
 
-.navbar{
-  .nav{
+.navbar {
+  .nav {
     display: inline-block;
     list-style: none;
     margin: 0;
+    padding: 0;
     float: right;
-    li{
+    li {
       float: left;
       padding: 0 20px;
-      >a{
+      > a {
         font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
         font-size: $font-big;
         display: block;
         line-height: 70px;
-        &:hover{
+        &:hover {
           border-bottom: 2px solid $red-light;
         }
       }
@@ -115,7 +115,6 @@ a {
 .login-page {
   @include centered(50%, 50%);
   @include strict_border(white);
-  @include red-h1;
 
   color: black;
   background: white;
@@ -137,18 +136,47 @@ a {
       box-sizing: border-box;
     }
 
-    button{
+    button {
       font-size: 22px;
     }
   }
 }
 
-@media (min-width: $small-screen){
+.registration {
+
+  form {
+
+    label.lg-label {
+      font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
+      text-align: right;
+    }
+
+    input:not([type=checkbox]) {
+      @include placeholder-color($gray-light);
+      font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    button {
+      font-size: 22px;
+    }
+  }
+}
+
+.login-toggle {
+  line-height: 45px;
+  float: right;
+  margin-right: 50px;
+}
+
+@media (min-width: $small-screen) {
   @import "breakpoints/small";
 }
-@media (min-width: $medium-screen){
+
+@media (min-width: $medium-screen) {
   @import "breakpoints/medium";
 }
-@media (min-width: $large-screen){
+
+@media (min-width: $large-screen) {
   @import "breakpoints/large";
 }

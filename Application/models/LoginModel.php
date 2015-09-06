@@ -51,9 +51,8 @@ class LoginModel
             return false;
         }
 
-        $result = UserModel::checkUser($username, $password);
+        $result = UserModel::checkUser($username);
 
-//        var_dump($result);
         if ($result) {
             Session::set('failed-login-count', 0);
             Session::set('last-failed-login', '');
@@ -74,7 +73,7 @@ class LoginModel
             return false;
         }
 
-        if ($password != $result['password']) {
+        if (!password_verify($password, $result['password'])) {
             self::incrementLoginFail($result['username']);
             Session::add(Message::get('LOGIN_FAILED'), Message::get('WRONG_PASSWORD'));
             return false;
@@ -160,7 +159,6 @@ class LoginModel
         Session::set('user_id', $user_id);
         Session::set('user_name', $username);
         Session::set('user_email', $email);
-
     }
 
     public static function logout()

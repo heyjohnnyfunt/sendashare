@@ -8,10 +8,10 @@
  */
 class UserModel
 {
-    public static function checkUser($username, $password)
+    public static function checkUser($username)
     {
         $db = Database::getDb()->connect();
-        if($query = $db->prepare("SELECT
+        if ($query = $db->prepare("SELECT
                   id,
                   username,
                   password,
@@ -25,51 +25,21 @@ class UserModel
                   users
                 WHERE
                   (username = ? OR email = ?) LIMIT 1")
-        ){
+        ) {
 
-            $query->bind_param('ss',$username, $username);
+            $query->bind_param('ss', $username, $username);
             $query->execute();
             /*$query->store_result();
             $query->bind_result($user_id, $username, $password, $firstname, $lastname, $email, $failed_login_count, $last_failed_login, $active_user);
             return $query->fetch();*/
-
-            $params = array();
-            $result = array();
-
-            $meta = $query->result_metadata();
-            while ($field = $meta->fetch_field()) {
-                $params[] = &$result[$field->name];
-            }
-            call_user_func_array(array($query, 'bind_result'), $params);
-
-            if ($query->error) return false;
-
-            while ($query->fetch()) {
-                foreach ($result as $key => $val)
-                    $c[$key] = $val;
-                $params = $c;
-            }
-            return $params;
+            return self::getAssocArrayFromSql($query);
 
         }
         return false;
     }
-    function stmt_bind_assoc (&$stmt, &$out) {
-        $data = mysqli_stmt_result_metadata($stmt);
-        $fields = array();
-        $out = array();
 
-        $fields[0] = $stmt;
-        $count = 1;
-
-        while($field = mysqli_fetch_field($data)) {
-            $fields[$count] = &$out[$field->name];
-            $count++;
-        }
-        call_user_func_array(mysqli_stmt_bind_result, $fields);
-    }
-
-    private static function getAssocArrayFromSql(&$query, &$result){
+    private static function getAssocArrayFromSql(&$query)
+    {
         $params = array();
         $result = array();
         $meta = $query->result_metadata();
@@ -88,4 +58,57 @@ class UserModel
         }
         return $params;
     }
+
+    public static function ifExists($sql_field, $value)
+    {
+        $db = Database::getDb()->connect();
+        switch ($sql_field) {
+            case 'username':
+                $stmt = 'SELECT id FROM users WHERE username = ? LIMIT 1';
+                break;
+            case 'email':
+                $stmt = 'SELECT id FROM users WHERE email = ? LIMIT 1';
+                break;
+            default:
+                $stmt = 'SELECT id FROM users WHERE username = ? LIMIT 1';
+                break;
+        }
+
+        if ($query = $db->prepare($stmt)) {
+            $query->bind_param('s', $value);
+            $query->execute();
+            if ($query->num_rows == 0)
+                return false;
+        }
+        return true;
+    }
+
+
+    public static function addUser($fields)
+    {
+        extract($fields);
+
+//        if(empty($firstname)) $firstname = 'NULL';
+//        if(empty($lastname)) $lastname = 'NULL';
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $db = Database::getDb()->connect();
+
+        if ($query = $db->prepare('
+              INSERT INTO
+                users
+                (username, password, firstname, lastname, email)
+              VALUES
+                (?,?,?,?,?)')
+        ) {
+            $query->bind_param('sssss', $username, $password, $firstname , $lastname, $email);
+            if ($query->execute())
+                return true;
+        }
+
+        return false;
+    }
+
+
 }

@@ -1,0 +1,51 @@
+$rows: 12;
+
+@mixin col-sm($x){
+  width: $x * 100%/$rows;
+  padding-left: 12px;
+  padding-right: 12px;
+  position: relative;
+  float: left;
+}
+
+.col-sm-1{
+  @include col-sm(1);
+}
+.col-sm-2{
+  @include col-sm(2);
+}
+.col-sm-3{
+  @include col-sm(3);
+}
+.col-sm-4{
+  @include col-sm(4);
+}
+.col-sm-5{
+  @include col-sm(5);
+}
+.col-sm-6{
+  @include col-sm(6);
+}
+.col-sm-7{
+  @include col-sm(7);
+}
+.col-sm-8{
+  @include col-sm(8);
+}
+.col-sm-9{
+  @include col-sm(9);
+}
+.col-sm-10{
+  @include col-sm(10);
+}
+.col-sm-11{
+  @include col-sm(11);
+}
+.col-sm-12{
+  @include col-sm(12);
+}
+
+.registration{
+  width: 70%;
+  margin: auto;
+}

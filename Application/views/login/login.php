@@ -10,11 +10,9 @@
         <h1>SendaShare</h1>
         <form id="login" action="<?php echo Config::get('URL'); ?>/login/login" method="post">
             <div class="form-group">
-                <!--                <label for="username" class="lg-label">Username: </label>-->
                 <input type="text" name="username" id="username" class="form-control" placeholder="Username or E-mail" required>
             </div>
             <div class="form-group">
-                <!--                <label for="password" class="lg-label">Password: </label>-->
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
             </div>
             <?php if (!empty($this->redirect)) { ?>
@@ -25,5 +23,8 @@
 
             <button type="submit" class="btn btn-danger pull-right">Login</button>
         </form>
+        <div class="login-toggle">
+            <a href="<?= Config::get('URL'); ?>/login/registration">Registration &rarr;</a>
+        </div>
     </div>
 </div>
