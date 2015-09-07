@@ -163,7 +163,8 @@
     width: 1170px; } }
 
 .form-group {
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  position: relative; }
 
 .form-control {
   display: block;
@@ -295,6 +296,8 @@ body {
 
 h1 {
   color: #cf4646; }
+  h1:hover {
+    color: #b32f2f; }
 
 .btn {
   -webkit-transition: all 0.25s;
@@ -313,14 +316,18 @@ a {
   color: #2f2f2f; }
   a:hover {
     color: #cf4646; }
-  a > h1:hover {
-    color: #b32f2f; }
+
+.error {
+  color: red;
+  font-family: "MyriadProBold", Helvetica, Arial, sans-serif; }
+
+.good {
+  color: green;
+  font-family: "MyriadProBold", Helvetica, Arial, sans-serif; }
 
 .logo {
   display: inline-block;
   float: left; }
-  .logo h1:hover {
-    color: #b32f2f; }
 
 .navbar .nav {
   display: inline-block;
@@ -393,6 +400,13 @@ a {
 
 .registration form button {
   font-size: 22px; }
+
+.form-loader-icon {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2px; }
 
 .login-toggle {
   line-height: 45px;

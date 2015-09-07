@@ -77,8 +77,11 @@ class UserModel
         if ($query = $db->prepare($stmt)) {
             $query->bind_param('s', $value);
             $query->execute();
-            if ($query->num_rows == 0)
+            $query->store_result();
+//            return self::getAssocArrayFromSql($query);
+            if ($query->num_rows == 0){
                 return false;
+            }
         }
         return true;
     }

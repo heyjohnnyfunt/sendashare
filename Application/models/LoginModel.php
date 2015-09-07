@@ -161,6 +161,12 @@ class LoginModel
         Session::set('user_email', $email);
     }
 
+    public static function checkUser($username){
+        if (UserModel::ifExists('username', strip_tags($username)) OR UserModel::ifExists('email', strip_tags($username)))
+            return true;
+        return false;
+    }
+
     public static function logout()
     {
         self::deleteCookie();

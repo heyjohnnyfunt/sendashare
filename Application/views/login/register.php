@@ -18,12 +18,16 @@
                 <label for="username" class="lg-label col-sm-3">Username: </label>
                 <input type="text" name="username" id="username" class="form-control col-sm-9"
                        placeholder="Username (2-32 chars)" pattern="^([a-zA-Z0-9]{2,32})$" required>
+                <img class="form-loader-icon" src="<?php echo Config::get('URL'); ?>/img/ajax-loader.gif" id="loaderIcon" />
             </div>
+            <p></p>
             <div class="form-group">
                 <label for="email" class="lg-label col-sm-3">Email: </label>
                 <input type="email" name="email" id="email" class="form-control col-sm-9"
                        placeholder="Email (2-32 chars)" required>
+                <img class="form-loader-icon" src="<?php echo Config::get('URL'); ?>/img/ajax-loader.gif" id="loaderIcon" />
             </div>
+            <p></p>
             <div class="form-group">
                 <label for="firstname" class="lg-label col-sm-3">First name: </label>
                 <input type="text" name="firstname" id="firstname" class="form-control col-sm-9"

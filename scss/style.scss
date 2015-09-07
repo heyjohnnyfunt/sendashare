@@ -84,6 +84,16 @@ a {
   }
 }
 
+.error{
+  color: red;
+  font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
+}
+
+.good{
+  color: green;
+  font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
+}
+
 .logo {
   display: inline-block;
   float: left;
@@ -161,6 +171,14 @@ a {
       font-size: 22px;
     }
   }
+}
+
+.form-loader-icon{
+   display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2px;
 }
 
 .login-toggle {

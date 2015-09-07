@@ -51,11 +51,13 @@ class RegistrationModel
             AND self::validateName($firstname)
             AND self::validateName($lastname)
             AND self::validatePassword($password, $conf_password))
-        )
+        ){
             return false;
+        }
 
-        if (UserModel::ifExists('username', $username) OR UserModel::ifExists('email', $email))
+        if (UserModel::ifExists('username', $username) OR UserModel::ifExists('email', $email)){
             return false;
+        }
 
         return true;
     }
@@ -89,6 +91,8 @@ class RegistrationModel
 
     private static function validateName($name)
     {
+        if(empty($name)) return true;
+
         if (!preg_match('/^[a-zA-Z]{2,64}$/', $name)) {
             Session::add(Message::get('LOGIN_FAILED'), Message::get('NAME_ERROR'));
             return false;
@@ -111,6 +115,18 @@ class RegistrationModel
             return false;
         }
         return true;
+    }
+
+    // for ajax
+    public static function checkUserName($username){
+        if (UserModel::ifExists('username', strip_tags($username)))
+            return true;
+        return false;
+    }
+    public static function checkUserEmail($email){
+        if (UserModel::ifExists('email', strip_tags($email)))
+            return true;
+        return false;
     }
 
 }

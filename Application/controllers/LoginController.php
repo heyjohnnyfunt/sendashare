@@ -68,20 +68,25 @@ class LoginController extends Controller
         }
     }
 
-    public function ajaxCheck(){
-        $login_successful = LoginModel::login(
-            Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
-        );
+    public function checkUsernameLogin()
+    {
+        if (!LoginModel::checkUser(Request::get_post('username'))) {
+            echo 'N';
+        } else echo 'Y';
+    }
 
-        if ($login_successful) {
-            if ($redirect = Request::get_post('redirect')) {
-                echo (ltrim(urldecode($redirect), '/'));
-            } else {
-                echo ('account');
-            }
-        } else {
-            echo ('login');
-        }
+    public function checkUsernameReg()
+    {
+        if (RegistrationModel::checkUserName(Request::get_post('username'))) {
+            echo 'N';
+        } else echo 'Y';
+    }
+
+    public function checkUserEmailReg()
+    {
+        if (RegistrationModel::checkUserEmail(Request::get_post('email'))) {
+            echo 'N';
+        } else echo 'Y';
     }
 
     public function logout()

@@ -11,7 +11,9 @@
         <form id="login" action="<?php echo Config::get('URL'); ?>/login/login" method="post">
             <div class="form-group">
                 <input type="text" name="username" id="username" class="form-control" placeholder="Username or E-mail" required>
+                <img class="form-loader-icon" src="<?php echo Config::get('URL'); ?>/img/ajax-loader.gif" id="loaderIcon" />
             </div>
+            <p></p>
             <div class="form-group">
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
             </div>
