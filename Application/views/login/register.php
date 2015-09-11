@@ -13,6 +13,12 @@
 
         <h2>Registration</h2>
 
+        <noscript>
+            <p class="error">ATENSION! This page won't work properly without enabled JavaScript. Your password will be
+                transfered to server unencrypted. Please, check how to enable it
+                in your browser and reload the page.</p>
+        </noscript>
+
         <form id="registration" action="<?php echo Config::get('URL'); ?>/login/register" method="post">
             <div class="form-group">
                 <label for="username" class="lg-label col-sm-3">Username: </label>
@@ -24,7 +30,7 @@
             <div class="form-group">
                 <label for="email" class="lg-label col-sm-3">Email: </label>
                 <input type="email" name="email" id="email" class="form-control col-sm-9"
-                       placeholder="Email (2-32 chars)" required>
+                       placeholder="Email (6-32 chars)" required>
                 <img class="form-loader-icon" src="<?php echo Config::get('URL'); ?>/img/ajax-loader.gif" id="loaderIcon" />
             </div>
             <p></p>
@@ -41,17 +47,13 @@
             <div class="form-group">
                 <label for="password" class="lg-label col-sm-3">Password: </label>
                 <input type="password" name="password" id="password" class="form-control col-sm-9"
-                       placeholder="Password" autocomplete="off" pattern=".{6}" required>
+                       placeholder="Password" autocomplete="off" pattern="{6,}" required>
             </div>
             <div class="form-group">
                 <label for="confPassword" class="lg-label col-sm-3">Confirm password: </label>
                 <input type="password" name="confPassword" id="confPassword" class="form-control col-sm-9"
-                       placeholder="Repeat password" autocomplete="off" pattern=".{6}" required>
+                       placeholder="Repeat password" autocomplete="off" pattern="{6,}" required>
             </div>
-
-            <?php if (!empty($this->redirect)) { ?>
-                <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>"/>
-            <?php } ?>
 
             <button type="submit" class="btn btn-danger pull-right">Register</button>
         </form>

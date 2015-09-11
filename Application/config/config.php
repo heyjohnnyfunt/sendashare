@@ -23,9 +23,11 @@ return array(
 
     'APP_PATH' => APP_PATH,
     'CONFIG_PATH' => APP_PATH . 'config/',
-    'VIEWS_PATH' => APP_PATH . 'views/',
-    'MODELS_PATH' => APP_PATH . 'models/',
     'CONTROLLERS_PATH' => APP_PATH . 'controllers/',
+    'CORE_PATH' => APP_PATH . 'core/',
+    'MODELS_PATH' => APP_PATH . 'models/',
+    'VIEWS_PATH' => APP_PATH . 'views/',
+
     'CSS_PATH' => BASE_PATH . 'css/',
     'JS_PATH' => BASE_PATH . 'js/'
 

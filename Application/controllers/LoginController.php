@@ -36,12 +36,28 @@ class LoginController extends Controller
 
         if ($login_successful) {
             if ($redirect = Request::get_post('redirect')) {
-                Redirect::toPath(ltrim(urldecode($redirect), '/'));
+                 Redirect::toPath(ltrim(urldecode($redirect), '/'));
             } else {
-                Redirect::toPath('account');
+                 Redirect::toPath('account');
             }
         } else {
-            Redirect::toPath('login');
+             Redirect::toPath('login');
+        }
+    }
+    public function ajaxLogin()
+    {
+        $login_successful = LoginModel::login(
+            Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
+        );
+
+        if ($login_successful) {
+            if ($redirect = Request::get_post('redirect')) {
+                echo ltrim(urldecode($redirect), '/');
+            } else {
+                echo Config::get('URL') . '/account';
+            }
+        } else {
+            echo 'N';
         }
     }
 
@@ -68,6 +84,19 @@ class LoginController extends Controller
         }
     }
 
+    public function ajaxRegister()
+    {
+        if (RegistrationModel::register()) {
+            if ($redirect = Request::get_post('redirect')) {
+                echo ltrim(urldecode($redirect), '/');
+            } else {
+                echo Config::get('URL') . '/login';
+            }
+        } else {
+            echo 'N';
+        }
+    }
+
     public function checkUsernameLogin()
     {
         if (!LoginModel::checkUser(Request::get_post('username'))) {
@@ -78,15 +107,15 @@ class LoginController extends Controller
     public function checkUsernameReg()
     {
         if (RegistrationModel::checkUserName(Request::get_post('username'))) {
-            echo 'N';
-        } else echo 'Y';
+            echo 'Y';
+        } else echo 'N';
     }
 
     public function checkUserEmailReg()
     {
         if (RegistrationModel::checkUserEmail(Request::get_post('email'))) {
-            echo 'N';
-        } else echo 'Y';
+            echo 'Y';
+        } else echo 'N';
     }
 
     public function logout()

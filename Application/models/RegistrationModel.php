@@ -56,6 +56,7 @@ class RegistrationModel
         }
 
         if (UserModel::ifExists('username', $username) OR UserModel::ifExists('email', $email)){
+            var_dump($field_array);
             return false;
         }
 
@@ -120,13 +121,16 @@ class RegistrationModel
     // for ajax
     public static function checkUserName($username){
         if (UserModel::ifExists('username', strip_tags($username)))
-            return true;
-        return false;
+            return false;
+        return true;
     }
     public static function checkUserEmail($email){
-        if (UserModel::ifExists('email', strip_tags($email)))
-            return true;
-        return false;
+        $email = strip_tags($email);
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            return false;
+        if (UserModel::ifExists('email', $email))
+            return false;
+        return true;
     }
 
 }

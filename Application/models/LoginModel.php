@@ -46,7 +46,7 @@ class LoginModel
 
     private static function validateUser($username, $password)
     {
-        if (Session::get('failed-login-count') >= 3 AND (Session::get('last-failed-login') > (time() - 30))) {
+        if (Session::get('failed_login_count') >= 3 AND (Session::get('last_failed_login') > (time() - 30))) {
             Session::add(Message::get('LOGIN_FAILED'), Message::get('LOGIN_3_ATTEMPTS'));
             return false;
         }
@@ -54,11 +54,11 @@ class LoginModel
         $result = UserModel::checkUser($username);
 
         if ($result) {
-            Session::set('failed-login-count', 0);
-            Session::set('last-failed-login', '');
+            Session::set('failed_login_count', 0);
+            Session::set('last_failed_login', '');
         } else {
-            Session::set('failed-login-count', Session::get('failed-login-count') + 1);
-            Session::set('last-failed-login', time());
+            Session::set('failed_login_count', Session::get('failed_login_count') + 1);
+            Session::set('last_failed_login', time());
             Session::add('feedback_negative', Message::get('LOGIN_3_ATTEMPTS'));
             return false;
         }
@@ -126,7 +126,7 @@ class LoginModel
         }
     }
 
-    public static function rememberMe($user_id)
+    private static function rememberMe($user_id)
     {
         $random_token = hash('sha256', openssl_random_pseudo_bytes(16));
 
@@ -155,7 +155,7 @@ class LoginModel
         setcookie('remember_me', $cookie_string, time() + Config::get('COOKIE_EXPIRE'), Config::get('COOKIE_PATH'));
     }
 
-    public static function setSessionProperties($user_id, $username, $email){
+    private static function setSessionProperties($user_id, $username, $email){
         Session::set('user_id', $user_id);
         Session::set('user_name', $username);
         Session::set('user_email', $email);

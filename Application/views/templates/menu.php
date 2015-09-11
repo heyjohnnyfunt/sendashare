@@ -18,7 +18,7 @@
         <ul class="nav">
             <li><a href="<?php echo Config::get('URL'); ?>/account"><?= Session::get('user_name')?></a></li>
             <li><a href="<?php echo Config::get('URL'); ?>/">Home page</a></li>
-            <li><a href="<?php echo Config::get('URL'); ?>/account">Profile</a></li>
+            <li><a href="<?php echo Config::get('URL'); ?>/account/settings">Settings</a></li>
             <li><a href="<?php echo Config::get('URL'); ?>/login/logout">Logout</a></li>
         </ul>
     </div>

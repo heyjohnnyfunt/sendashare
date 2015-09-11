@@ -39,6 +39,10 @@
   font-style: normal;
   font-weight: normal; }
 
+.row {
+  margin-left: -12px;
+  margin-right: -12px; }
+
 .col-1 {
   width: 8.33333%;
   padding-left: 12px;
@@ -176,7 +180,7 @@
   line-height: 1.42857143;
   color: #2b394a;
   background: #fff;
-  border: 1px solid #797979;
+  border: 2px solid #2b394a;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -289,7 +293,8 @@ body {
   height: 100%; }
 
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  word-wrap: break-word; }
 
 *:focus {
   outline: 0; }
@@ -313,13 +318,16 @@ a {
   -o-transition: all 0.25s;
   transition: all 0.25s;
   text-decoration: none;
-  color: #2f2f2f; }
+  color: #2b394a; }
   a:hover {
     color: #cf4646; }
 
 .error {
   color: red;
   font-family: "MyriadProBold", Helvetica, Arial, sans-serif; }
+
+.error-input {
+  background-color: #e9abab; }
 
 .good {
   color: green;
@@ -328,6 +336,10 @@ a {
 .logo {
   display: inline-block;
   float: left; }
+
+label.lg-label {
+  font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
+  margin-top: 5px; }
 
 .navbar .nav {
   display: inline-block;
@@ -342,7 +354,8 @@ a {
       font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
       font-size: 18px;
       display: block;
-      line-height: 70px; }
+      line-height: 70px;
+      border-bottom: 2px solid transparent; }
       .navbar .nav li > a:hover {
         border-bottom: 2px solid #cf4646; }
 
@@ -357,11 +370,8 @@ a {
   border-radius: 2px;
   color: black;
   background: white;
-  width: 50%;
+  width: 100%;
   padding: 20px; }
-  .login-page form label.lg-label {
-    font-size: 24px;
-    font-family: "MyriadProBold", Helvetica, Arial, sans-serif; }
   .login-page form input:not([type=checkbox]) {
     /* Firefox 19+ */
     /* Firefox 18- */
@@ -379,10 +389,6 @@ a {
       color: #7f8999; }
   .login-page form button {
     font-size: 22px; }
-
-.registration form label.lg-label {
-  font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
-  text-align: right; }
 
 .registration form input:not([type=checkbox]) {
   /* Firefox 19+ */
@@ -406,85 +412,113 @@ a {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 2px; }
+  right: 3px; }
+
+.form-hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+  margin: 0; }
 
 .login-toggle {
   line-height: 45px;
   float: right;
   margin-right: 50px; }
 
+.popup-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; }
+
+.popup-loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: url("/img/loading.gif") no-repeat center;
+  background-size: cover;
+  height: 500px;
+  width: 500px; }
+
+.settings fieldset {
+  margin-bottom: 15px;
+  border: none;
+  border-top: 15px solid #2b394a;
+  padding: 20px 20px 10px; }
+  .settings fieldset legend {
+    padding: 0 15px;
+    color: #cf4646;
+    font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+    font-size: 20px; }
+
 @media (min-width: 768px) {
   .col-sm-1 {
     width: 8.33333%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-2 {
     width: 16.66667%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-3 {
     width: 25%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-4 {
     width: 33.33333%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-5 {
     width: 41.66667%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-6 {
     width: 50%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-7 {
     width: 58.33333%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-8 {
     width: 66.66667%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-9 {
     width: 75%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-10 {
     width: 83.33333%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-11 {
     width: 91.66667%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .col-sm-12 {
     width: 100%;
     padding-left: 12px;
     padding-right: 12px;
-    position: relative;
     float: left; }
   .registration {
     width: 70%;

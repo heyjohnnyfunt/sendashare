@@ -78,8 +78,7 @@ class UserModel
             $query->bind_param('s', $value);
             $query->execute();
             $query->store_result();
-//            return self::getAssocArrayFromSql($query);
-            if ($query->num_rows == 0){
+            if ($query->num_rows == 0) {
                 return false;
             }
         }
@@ -105,7 +104,7 @@ class UserModel
               VALUES
                 (?,?,?,?,?)')
         ) {
-            $query->bind_param('sssss', $username, $password, $firstname , $lastname, $email);
+            $query->bind_param('sssss', $username, $password, $firstname, $lastname, $email);
             if ($query->execute())
                 return true;
         }
@@ -113,5 +112,26 @@ class UserModel
         return false;
     }
 
+    public static function getCurrentUser()
+    {
+        $db = Database::getDb()->connect();
+        if ($query = $db->prepare("SELECT
+                  username,
+                  firstname,
+                  lastname,
+                  email
+                FROM
+                  users
+                WHERE
+                  id = ? LIMIT 1")
+        ) {
+
+            $query->bind_param('s', Session::get('user_id'));
+            $query->execute();
+            return self::getAssocArrayFromSql($query);
+
+        }
+        return false;
+    }
 
 }

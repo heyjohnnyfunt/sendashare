@@ -1,6 +1,6 @@
 <? include(Config::get('VIEWS_PATH') . 'templates/menu.php') ?>
 
-<div class="login-page">
+<div class="container">
     <h1>This is SendaShare</h1>
 
     <?php if (Session::userIsLoggedIn()) { ?>
