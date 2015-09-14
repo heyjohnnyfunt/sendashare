@@ -9,9 +9,6 @@ function main() {
 
     var settings = new Settings();
     settings.set();
-
-
-
 }
 
 function Login() {
@@ -367,7 +364,7 @@ function Settings() {
     }
 }
 
-var Validator = (function(){
+var Validator = (function () {
 
     var compareVals = function (psw1, psw2) {
         return psw1.val() === psw2.val();
@@ -430,136 +427,164 @@ var Helper = (function () {
 
 })();
 
-
 function strip_tags(str) {
     return str.replace(/<\/?[^>]+>/gi, '');
 }
-/*
 
-(function(){
-    var form = $('form#upload_file');
-    var dropZone = form.find('#dropZone');
-    var span = dropZone.find('span');
+(function () {
 
-    var maxsize = 1024 * 1024;
+    var form = $('#dropZone-form'),
+        fileList = form.siblings('#files');
 
-    if (typeof(window.FileReader) == 'undefined') {
-        span.addClass('error').html('No browser support');
-        form.addClass('error-bg');
-    }
-
-    dropZone[0].ondragover = function() {
-        dropZone.addClass('hover');
-        return false;
-    };
-
-    dropZone[0].ondragleave = function() {
-        dropZone.removeClass('hover');
-        return false;
-    };
-
-    dropZone[0].ondrop = function(event) {
-        event.preventDefault();
-        dropZone.removeClass('hover');
-        dropZone.addClass('drop');
-
-        var file = event.dataTransfer.files[0];
-
-        if (file.size > maxsize) {
-            span.addClass('error').html('Файл слишком большой!');
-            return false;
-        }
-
-        var xhr = new XMLHttpRequest();
-        xhr.upload.addEventListener('progress', uploadProgress, false);
-        xhr.onreadystatechange = stateChange;
-        xhr.open('POST', '/account/ajaxUpload');
-        xhr.setRequestHeader('X-FILE-NAME', file.name);
-        xhr.send(file);
-    };
-
-
-    function uploadProgress(event) {
-        var percent = parseInt(event.loaded / event.total * 100);
-        span.text('Загрузка: ' + percent + '%');
-    }
-    function stateChange(event) {
-        if (event.target.readyState == 4) {
-            if (event.target.status == 200) {
-                span.text('Загрузка успешно завершена!');
-            } else {
-                span.addClass('error').text('Произошла ошибка!');
-            }
-        }
-    }
-
-})();*/
-
-(function(){
     var dropZone = $('form > #dropZone'),
-        span = dropZone.children('span'),        
-        maxsize = 100 * 1024 * 1024; // максимальный размер фалйа - 1 мб.
+        span = dropZone.children('span'),
+        maxsize = 100 * 1024 * 1024; // максимальный размер фалйа - 100 мб.
+
+    form.on('click', '[type=submit]', function (event) {
+        event.preventDefault();
+        var file_data = $("#fileToUpload").prop("files");
+
+        //formData.append("fileToUpload", file_data);
+        $.ajax({
+            method: 'POST',
+            url: window.location.protocol + '//' + window.location.host + '/account/ajaxUpload',
+            //dataType: 'script',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: sendFiles(file_data),
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            },
+            complete: function () {
+                var fileInput = $("#fileToUpload");
+                fileInput.replaceWith(fileInput.clone(true));
+            }
+        });
+    });
+
 
     // Проверка поддержки браузером
     if (typeof(window.FileReader) == 'undefined') {
-        span.text('Your browser is not supporting Drag&Drop technology. ' +
-            'You can manually add files');
-        dropZone.addClass('error');
+        createSimpleUpload();
+        return;
     }
 
     // Добавляем класс hover при наведении
-    dropZone[0].ondragover = function() {
+    dropZone[0].ondragover = function () {
         dropZone.addClass('hover');
         return false;
     };
 
     // Убираем класс hover
-    dropZone[0].ondragleave = function() {
+    dropZone[0].ondragleave = function () {
         dropZone.removeClass('hover');
         return false;
     };
 
     // Обрабатываем событие Drop
-    dropZone[0].ondrop = function(event) {
+    dropZone[0].ondrop = function (event) {
         event.preventDefault();
         dropZone.removeClass('hover');
         dropZone.addClass('drop');
 
-        var file = event.dataTransfer.files[0];
+        sendFiles(event.dataTransfer.files);
 
-        // Проверяем размер файла
-        if (file.size > maxsize) {
-            span.text('Файл слишком большой!');
-            dropZone.addClass('error');
-            return false;
-        }
-
-        // Создаем запрос
-        var xhr = new XMLHttpRequest();
-        //xhr.upload.addEventListener('progress', uploadProgress, false);
-
-        xhr.upload.onprogress = uploadProgress;
-        xhr.onreadystatechange = stateChange;
-        xhr.open('POST', '/account/ajaxUpload');
-        xhr.setRequestHeader('X-FILE-NAME', file.name);
-        xhr.send(file);
     };
 
     // Показываем процент загрузки
-    function uploadProgress(event) {
+    function uploadProgress(event, progressBar) {
+        if (!event.lengthComputable) return;
+
         var percent = parseInt(event.loaded / event.total * 100);
-        span.text('Upload: ' + percent + '%');
+        progressBar.css('width', percent + '%');
     }
 
     // Пост обрабочик
-    function stateChange(event) {
+    /*function stateChange(event) {
         if (event.target.readyState == 4) {
             if (event.target.status == 200) {
-                span.text('File uploaded');
+                span.html(event.target.responseText);
             } else {
                 span.text('Error accured..');
-                dropZone.addClass('error');
+                span.addClass('error');
             }
         }
+    }*/
+
+    function addFile(index, file) {
+        var p = $('<p/>').text(file.name + ' is uploading...'),
+            progressBar = $('<div/>').addClass('progress-bar'),
+            progress = $('<div/>').addClass('progress'),
+            div = $('<div/>').attr('data-id', index);
+
+        p.appendTo(div);
+        progress.append(progressBar).appendTo(div);
+        div.appendTo(fileList).show();
+        return div;
     }
+
+    function sendFiles(file_data) {
+
+        $.each(file_data, function (index, file) {
+
+            var formData = new FormData();                  // Creating object of FormData class
+            // Проверяем размер файла
+            if (file.size > maxsize) {
+                span.text(file.name + ' is too big. Max size: 100Mb, max number of files: 20.');
+                dropZone.addClass('error');
+                return false;
+            }
+            formData.append('fileToUpload', file, file.name);
+            var fileDiv = addFile(index, file),
+                progressBar = fileDiv.find('.progress-bar');
+
+            $.ajax({
+                xhr: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.upload.onprogress = function(event){ // uploadProgress;
+                        var percent = parseInt(event.loaded / event.total * 100);
+                        progressBar.css('width', percent + '%');
+                    };
+                    //xhr.onreadystatechange = stateChange;
+                    return xhr;
+                },
+                method: 'POST',
+                url: window.location.protocol + '//' + window.location.host + '/account/ajaxUpload',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    fileDiv.find('p').text(file.name + ' uploaded');
+                },
+                error: function (data) {
+                    fileDiv.find('p').text('Error occurred. ' + file.name + ' is NOT uploaded');
+                }
+            });
+        });
+    }
+
+    function createSimpleUpload() {
+        span.text('Your browser is not supporting Drag&Drop technology. ' +
+            'You can manually add files');
+        dropZone.addClass('error');
+        $('<input>').attr({
+            type: 'file',
+            id: 'fileToUpload',
+            name: 'fileToUpload[]',
+            value: 'Upload new file',
+            multiple: 'multiple',
+            enctype: 'multipart/form-data'
+        }).appendTo(dropZone);
+        $('<input>').attr({
+            type: 'submit',
+            value: 'Upload',
+            name: 'submit'
+        }).appendTo(dropZone);
+    }
+
 })();
