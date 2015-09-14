@@ -151,13 +151,13 @@ $rows: 12;
   }
 
   &.btn-default {
-    border: 2px solid black;
+    border: 2px solid $blue-light;
     background: white;
-    color: black;
+    color: $blue-light;
     &:hover {
-      background-color: black;
+      background-color: $blue-light;
       color: white;
-      border-color: white;
+      border-color: $blue-light;
     }
   }
 

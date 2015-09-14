@@ -9,6 +9,9 @@ function main() {
 
     var settings = new Settings();
     settings.set();
+
+
+
 }
 
 function Login() {
@@ -362,8 +365,6 @@ function Settings() {
             });
         });
     }
-
-
 }
 
 var Validator = (function(){
@@ -433,4 +434,132 @@ var Helper = (function () {
 function strip_tags(str) {
     return str.replace(/<\/?[^>]+>/gi, '');
 }
+/*
 
+(function(){
+    var form = $('form#upload_file');
+    var dropZone = form.find('#dropZone');
+    var span = dropZone.find('span');
+
+    var maxsize = 1024 * 1024;
+
+    if (typeof(window.FileReader) == 'undefined') {
+        span.addClass('error').html('No browser support');
+        form.addClass('error-bg');
+    }
+
+    dropZone[0].ondragover = function() {
+        dropZone.addClass('hover');
+        return false;
+    };
+
+    dropZone[0].ondragleave = function() {
+        dropZone.removeClass('hover');
+        return false;
+    };
+
+    dropZone[0].ondrop = function(event) {
+        event.preventDefault();
+        dropZone.removeClass('hover');
+        dropZone.addClass('drop');
+
+        var file = event.dataTransfer.files[0];
+
+        if (file.size > maxsize) {
+            span.addClass('error').html('Файл слишком большой!');
+            return false;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener('progress', uploadProgress, false);
+        xhr.onreadystatechange = stateChange;
+        xhr.open('POST', '/account/ajaxUpload');
+        xhr.setRequestHeader('X-FILE-NAME', file.name);
+        xhr.send(file);
+    };
+
+
+    function uploadProgress(event) {
+        var percent = parseInt(event.loaded / event.total * 100);
+        span.text('Загрузка: ' + percent + '%');
+    }
+    function stateChange(event) {
+        if (event.target.readyState == 4) {
+            if (event.target.status == 200) {
+                span.text('Загрузка успешно завершена!');
+            } else {
+                span.addClass('error').text('Произошла ошибка!');
+            }
+        }
+    }
+
+})();*/
+
+(function(){
+    var dropZone = $('form > #dropZone'),
+        span = dropZone.children('span'),        
+        maxsize = 100 * 1024 * 1024; // максимальный размер фалйа - 1 мб.
+
+    // Проверка поддержки браузером
+    if (typeof(window.FileReader) == 'undefined') {
+        span.text('Your browser is not supporting Drag&Drop technology. ' +
+            'You can manually add files');
+        dropZone.addClass('error');
+    }
+
+    // Добавляем класс hover при наведении
+    dropZone[0].ondragover = function() {
+        dropZone.addClass('hover');
+        return false;
+    };
+
+    // Убираем класс hover
+    dropZone[0].ondragleave = function() {
+        dropZone.removeClass('hover');
+        return false;
+    };
+
+    // Обрабатываем событие Drop
+    dropZone[0].ondrop = function(event) {
+        event.preventDefault();
+        dropZone.removeClass('hover');
+        dropZone.addClass('drop');
+
+        var file = event.dataTransfer.files[0];
+
+        // Проверяем размер файла
+        if (file.size > maxsize) {
+            span.text('Файл слишком большой!');
+            dropZone.addClass('error');
+            return false;
+        }
+
+        // Создаем запрос
+        var xhr = new XMLHttpRequest();
+        //xhr.upload.addEventListener('progress', uploadProgress, false);
+
+        xhr.upload.onprogress = uploadProgress;
+        xhr.onreadystatechange = stateChange;
+        xhr.open('POST', '/account/ajaxUpload');
+        xhr.setRequestHeader('X-FILE-NAME', file.name);
+        xhr.send(file);
+    };
+
+    // Показываем процент загрузки
+    function uploadProgress(event) {
+        var percent = parseInt(event.loaded / event.total * 100);
+        span.text('Upload: ' + percent + '%');
+    }
+
+    // Пост обрабочик
+    function stateChange(event) {
+        if (event.target.readyState == 4) {
+            if (event.target.status == 200) {
+                span.text('File uploaded');
+            } else {
+                span.text('Error accured..');
+                dropZone.addClass('error');
+            }
+        }
+    }
+})();

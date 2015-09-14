@@ -6,7 +6,7 @@
 
 html {
   -webkit-font-smoothing: antialiased;
-  font-family: "MyriadProLight", Helvetica, Arial, sans-serif;
+  font-family: Tahoma, Helvetica, Arial, sans-serif;
   height: 100%;
 }
 
@@ -80,21 +80,26 @@ a {
   @include transition;
   text-decoration: none;
   color: $blue-darker;
+  cursor: pointer;
   &:hover {
     color: $red;
   }
 }
 
-.error{
+.error {
   color: red;
   font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
 }
 
-.error-input{
+.error-input {
   background-color: $red-light;
 }
 
-.good{
+.error-bg {
+  background-color: $red-lighter !important;
+}
+
+.good {
   color: green;
   font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
 }
@@ -133,6 +138,23 @@ label.lg-label {
   }
 }
 
+.nav-left {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px -12px;
+  > li {
+    > a {
+      border-right: 15px solid $red;
+      font-size: $font-big;
+      font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+      display: block;
+      padding: 10px;
+      &:hover {
+        border-right-color: $gray-lighter;
+      }
+    }
+  }
+}
 
 .login-page {
   @include centered(50%, 50%);
@@ -175,7 +197,7 @@ label.lg-label {
   }
 }
 
-.form-loader-icon{
+.form-loader-icon {
   display: none;
   position: absolute;
   top: 50%;
@@ -183,7 +205,7 @@ label.lg-label {
   right: 3px;
 }
 
-.form-hint{
+.form-hint {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -197,7 +219,7 @@ label.lg-label {
   margin-right: 50px;
 }
 
-.popup-bg{
+.popup-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -207,7 +229,7 @@ label.lg-label {
   z-index: 999;
 }
 
-.popup-loader{
+.popup-loader {
   @include centered(50%, 50%);
   z-index: 1000;
   background: url('/img/loading.gif') no-repeat center;
@@ -216,20 +238,81 @@ label.lg-label {
   width: 500px;
 }
 
-.settings{
-  fieldset{
+.settings {
+  fieldset {
     margin-bottom: 15px;
     border: none;
     border-top: 15px solid $blue-darker;
     padding: 20px 20px 10px;
 
-    legend{
+    legend {
       padding: 0 15px;
       color: $red;
       font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
       font-size: 20px;
     }
   }
+}
+
+.upload-file{
+  width: 100%;
+  border: 7px dashed $gray-lighter;
+  border-radius: 5px;
+  min-height: 300px;
+  .upload-inner{
+    background-color: #f9f9f9;
+    min-height: inherit;
+    position: relative;
+    text-align: center;
+    span {
+      @include centered(50%,50%);
+    }
+    &.hover{
+      background-color: #f2f2f2;
+    }
+
+    &.error {
+      background: #faa;
+      border-color: #f00;
+    }
+
+    &.drop {
+      background: #afa;
+      border-color: #0f0;
+    }
+  }
+}
+
+.dropZone {
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+
+  width: 400px;
+  padding: 50px 0;
+  margin: 50px auto;
+
+  background: #eee;
+  border: 1px solid #ccc;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.dropZone.hover {
+  background: #ddd;
+  border-color: #aaa;
+}
+
+.dropZone.error {
+  background: #faa;
+  border-color: #f00;
+}
+
+.dropZone.drop {
+  background: #afa;
+  border-color: #0f0;
 }
 
 // responsive css files

@@ -207,13 +207,13 @@
   .btn.btn-lg {
     font-size: 18px; }
   .btn.btn-default {
-    border: 2px solid black;
+    border: 2px solid #839bb3;
     background: white;
-    color: black; }
+    color: #839bb3; }
     .btn.btn-default:hover {
-      background-color: black;
+      background-color: #839bb3;
       color: white;
-      border-color: white; }
+      border-color: #839bb3; }
   .btn.btn-shadow {
     width: 100%;
     -webkit-box-shadow: 0 1px 0 0 #bac2c9;
@@ -285,7 +285,7 @@ input[type=checkbox] {
 
 html {
   -webkit-font-smoothing: antialiased;
-  font-family: "MyriadProLight", Helvetica, Arial, sans-serif;
+  font-family: Tahoma, Helvetica, Arial, sans-serif;
   height: 100%; }
 
 body {
@@ -318,7 +318,8 @@ a {
   -o-transition: all 0.25s;
   transition: all 0.25s;
   text-decoration: none;
-  color: #2b394a; }
+  color: #2b394a;
+  cursor: pointer; }
   a:hover {
     color: #cf4646; }
 
@@ -328,6 +329,9 @@ a {
 
 .error-input {
   background-color: #e9abab; }
+
+.error-bg {
+  background-color: #f9e8e8 !important; }
 
 .good {
   color: green;
@@ -358,6 +362,19 @@ label.lg-label {
       border-bottom: 2px solid transparent; }
       .navbar .nav li > a:hover {
         border-bottom: 2px solid #cf4646; }
+
+.nav-left {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px -12px; }
+  .nav-left > li > a {
+    border-right: 15px solid #cf4646;
+    font-size: 18px;
+    font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+    display: block;
+    padding: 10px; }
+    .nav-left > li > a:hover {
+      border-right-color: #d7ddea; }
 
 .login-page {
   position: absolute;
@@ -458,6 +475,57 @@ label.lg-label {
     color: #cf4646;
     font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
     font-size: 20px; }
+
+.upload-file {
+  width: 100%;
+  border: 7px dashed #d7ddea;
+  border-radius: 5px;
+  min-height: 300px; }
+  .upload-file .upload-inner {
+    background-color: #f9f9f9;
+    min-height: inherit;
+    position: relative;
+    text-align: center; }
+    .upload-file .upload-inner span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); }
+    .upload-file .upload-inner.hover {
+      background-color: #f2f2f2; }
+    .upload-file .upload-inner.error {
+      background: #faa;
+      border-color: #f00; }
+    .upload-file .upload-inner.drop {
+      background: #afa;
+      border-color: #0f0; }
+
+.dropZone {
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+  width: 400px;
+  padding: 50px 0;
+  margin: 50px auto;
+  background: #eee;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+.dropZone.hover {
+  background: #ddd;
+  border-color: #aaa; }
+
+.dropZone.error {
+  background: #faa;
+  border-color: #f00; }
+
+.dropZone.drop {
+  background: #afa;
+  border-color: #0f0; }
 
 @media (min-width: 768px) {
   .col-sm-1 {

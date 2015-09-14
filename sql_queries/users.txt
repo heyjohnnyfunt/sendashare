@@ -1,12 +1,17 @@
 CREATE TABLE sendashare.users
 (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    login VARCHAR(200) NOT NULL,
-    password VARCHAR(1024) NOT NULL,
-    firstname VARCHAR(200) NOT NULL,
-    lastname VARCHAR(200) NOT NULL,
-    email VARCHAR(300) NOT NULL,
-    birthday DATE NOT NULL,
-    last_login TIMESTAMP NOT NULL
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  login VARCHAR(200) NOT NULL,
+  password VARCHAR(1024) NOT NULL,
+  firstname VARCHAR(200) NOT NULL,
+  lastname VARCHAR(200) NOT NULL,
+  email VARCHAR(300) NOT NULL,
+  birthday DATE NOT NULL,
+  last_login TIMESTAMP NOT NULL
 );
 ALTER TABLE users ADD CONSTRAINT unique_id UNIQUE (id);
+ALTER TABLE users MODIFY COLUMN birthday DATE NULL;
+ALTER TABLE sendashare.users MODIFY COLUMN last_login TIMESTAMP NULL;
+ALTER TABLE sendashare.users ADD failed_login_count INT DEFAULT 0 NULL;
+ALTER TABLE sendashare.users MODIFY COLUMN last_failed_login  int(10) DEFAULT NULL COMMENT 'unix timestamp of last failed login attempt';
+ALTER TABLE sendashare.users ADD remember_me_token VARCHAR(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s remember-me cookie token';

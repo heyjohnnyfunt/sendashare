@@ -7,8 +7,8 @@
  */
 ?>
 
-<nav class="navbar clearfix">
-    <div class="container">
+<nav class="navbar">
+    <div class="container clearfix">
         <div class="logo">
             <a href="<?php echo Config::get('URL'); ?>/">
                 <h1>SendaShare</h1>
