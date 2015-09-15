@@ -239,7 +239,6 @@ function Login() {
     }
 }
 
-
 function Settings() {
 
     this.set = function () {
@@ -440,6 +439,8 @@ function strip_tags(str) {
         span = dropZone.children('span'),
         maxsize = 100 * 1024 * 1024; // максимальный размер фалйа - 100 мб.
 
+    if (dropZone.length < 1) return;
+
     form.on('click', '[type=submit]', function (event) {
         event.preventDefault();
         var file_data = $("#fileToUpload").prop("files");
@@ -505,15 +506,15 @@ function strip_tags(str) {
 
     // Пост обрабочик
     /*function stateChange(event) {
-        if (event.target.readyState == 4) {
-            if (event.target.status == 200) {
-                span.html(event.target.responseText);
-            } else {
-                span.text('Error accured..');
-                span.addClass('error');
-            }
-        }
-    }*/
+     if (event.target.readyState == 4) {
+     if (event.target.status == 200) {
+     span.html(event.target.responseText);
+     } else {
+     span.text('Error accured..');
+     span.addClass('error');
+     }
+     }
+     }*/
 
     function addFile(index, file) {
         var p = $('<p/>').text(file.name + ' is uploading...'),
@@ -545,7 +546,7 @@ function strip_tags(str) {
             $.ajax({
                 xhr: function () {
                     var xhr = new XMLHttpRequest();
-                    xhr.upload.onprogress = function(event){ // uploadProgress;
+                    xhr.upload.onprogress = function (event) { // uploadProgress;
                         var percent = parseInt(event.loaded / event.total * 100);
                         progressBar.css('width', percent + '%');
                     };
@@ -559,10 +560,13 @@ function strip_tags(str) {
                 processData: false,
                 data: formData,
                 success: function (data) {
-                    fileDiv.find('p').text(file.name + ' uploaded');
+                    if (data !== 'N')
+                        fileDiv.find('p').text(file.name + ' uploaded');
+                    else
+                        fileDiv.find('p').addClass('error').text(file.name + ' is NOT uploaded. Try again..');
                 },
                 error: function (data) {
-                    fileDiv.find('p').text('Error occurred. ' + file.name + ' is NOT uploaded');
+                    fileDiv.find('p').text('Error occurred. ' + file.name + ' was NOT sent');
                 }
             });
         });

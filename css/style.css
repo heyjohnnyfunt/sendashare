@@ -1,44 +1,68 @@
 @charset "UTF-8";
 /* font-family: "MyriadProRegular"; */
 @font-face {
-  font-family: "MyriadProRegular";
-  src: url("/fonts/MyriadProRegular/MyriadProRegular.eot");
-  src: url("/fonts/MyriadProRegular/MyriadProRegular.eot?#iefix") format("embedded-opentype"), url("/fonts/MyriadProRegular/MyriadProRegular.woff") format("woff"), url("/fonts/MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+  font-family: "Pacifico";
+  src: url("/fonts/Pacifico/Pacifico.ttf");
   font-style: normal;
   font-weight: normal; }
 
-/* font-family: "MyriadProBold"; */
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron/Orbitron-Regular.ttf");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: "OrbitronBold";
+  src: url("/fonts/Orbitron/Orbitron-Bold.ttf");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: "OrbitronMed";
+  src: url("/fonts/Orbitron/Orbitron-Medium.ttf");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: "Gloria";
+  src: url("/fonts/Gloria/GloriaHallelujah.ttf");
+  font-style: normal;
+  font-weight: normal; }
+
+/*
+
+@font-face {
+  font-family: "MyriadProRegular";
+  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot");
+  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
+  url($fonts_path + "MyriadProRegular/MyriadProRegular.woff") format("woff"),
+  url($fonts_path + "MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/!* font-family: "MyriadProBold"; *!/
 @font-face {
   font-family: "MyriadProBold";
-  src: url("/fonts/MyriadProBold/MyriadProBold.eot");
-  src: url("/fonts/MyriadProBold/MyriadProBold.eot?#iefix") format("embedded-opentype"), url("/fonts/MyriadProBold/MyriadProBold.woff") format("woff"), url("/fonts/MyriadProBold/MyriadProBold.ttf") format("truetype");
+  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot");
+  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot?#iefix")format("embedded-opentype"),
+  url($fonts_path + "MyriadProBold/MyriadProBold.woff") format("woff"),
+  url($fonts_path + "MyriadProBold/MyriadProBold.ttf") format("truetype");
   font-style: normal;
-  font-weight: normal; }
+  font-weight: normal;
+}
 
-/* font-family: "PFSquareSansProMedium"; */
-@font-face {
-  font-family: "PFSquareSansProMedium";
-  src: url("/fonts/PFSquareSansProMedium/PFSquareSansProMedium.eot");
-  src: url("/fonts/PFSquareSansProMedium/PFSquareSansProMedium.eot?#iefix") format("embedded-opentype"), url("/fonts/PFSquareSansProMedium/PFSquareSansProMedium.woff") format("woff"), url("/fonts/PFSquareSansProMedium/PFSquareSansProMedium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal; }
-
-/* font-family: "PFSquareSansProLight"; */
-@font-face {
-  font-family: "PFSquareSansProLight";
-  src: url("/fonts/PFSquareSansProMedium/PFSquareSansProLight.ttf");
-  src: url("/fonts/PFSquareSansProMedium/PFSquareSansProLight.ttf?#iefix") format("embedded-opentype"), url("/fonts/PFSquareSansProMedium/PFSquareSansProLight.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal; }
-
-/* font-family: "MyriadProLight"; */
+/!* font-family: "MyriadProLight"; *!/
 @font-face {
   font-family: "MyriadProLight";
-  src: url("/fonts/MyriadProRegular/MyriadProLight.ttf");
-  src: url("/fonts/MyriadProRegular/MyriadProLight.ttf?#iefix") format("embedded-opentype"), url("/fonts/MyriadProRegular/MyriadProLight.otf") format("otf"), url("/fonts/MyriadProRegular/MyriadProLight.ttf") format("truetype");
+  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf");
+  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf?#iefix")format("embedded-opentype"),
+  url($fonts_path + "MyriadProRegular/MyriadProLight.otf") format("otf"),
+  url($fonts_path + "MyriadProRegular/MyriadProLight.ttf") format("truetype");
   font-style: normal;
-  font-weight: normal; }
-
+  font-weight: normal;
+}*/
 .row {
   margin-left: -12px;
   margin-right: -12px; }
@@ -196,7 +220,7 @@
 .btn {
   border: none;
   border-radius: 2px;
-  font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+  font-family: "Gloria", Helvetica, Arial, sans-serif;
   padding: 6px 12px;
   font-size: 16px;
   cursor: pointer; }
@@ -290,7 +314,8 @@ html {
 
 body {
   margin: 0;
-  height: 100%; }
+  height: 100%;
+  color: #2b394a; }
 
 * {
   box-sizing: border-box;
@@ -300,9 +325,14 @@ body {
   outline: 0; }
 
 h1 {
-  color: #cf4646; }
+  color: #cf4646;
+  font-family: 'Pacifico', Helvetica, Arial, cursive;
+  font-size: 40px; }
   h1:hover {
     color: #b32f2f; }
+
+h2 {
+  font-family: 'Gloria', Helvetica, Arial, cursive; }
 
 .btn {
   -webkit-transition: all 0.25s;
@@ -320,12 +350,12 @@ a {
   text-decoration: none;
   color: #2b394a;
   cursor: pointer; }
-  a:hover {
+  a:hover, a.active {
     color: #cf4646; }
 
 .error {
   color: red;
-  font-family: "MyriadProBold", Helvetica, Arial, sans-serif; }
+  font-family: "OrbitronBold", Helvetica, Arial, sans-serif; }
 
 .error-input {
   background-color: #e9abab; }
@@ -335,14 +365,17 @@ a {
 
 .good {
   color: green;
-  font-family: "MyriadProBold", Helvetica, Arial, sans-serif; }
+  font-family: "OrbitronBold", Helvetica, Arial, sans-serif; }
 
 .logo {
   display: inline-block;
   float: left; }
+  .logo h1 {
+    font-size: 40px;
+    margin: 0; }
 
 label.lg-label {
-  font-family: "MyriadProBold", Helvetica, Arial, sans-serif;
+  font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
   margin-top: 5px; }
 
 .navbar .nav {
@@ -355,7 +388,7 @@ label.lg-label {
     float: left;
     padding: 0 20px; }
     .navbar .nav li > a {
-      font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+      font-family: "Pacifico", Helvetica, Arial, sans-serif;
       font-size: 18px;
       display: block;
       line-height: 70px;
@@ -370,10 +403,10 @@ label.lg-label {
   .nav-left > li > a {
     border-right: 15px solid #cf4646;
     font-size: 18px;
-    font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+    font-family: "Orbitron", Helvetica, Arial, sans-serif;
     display: block;
     padding: 10px; }
-    .nav-left > li > a:hover {
+    .nav-left > li > a:hover, .nav-left > li > a.active {
       border-right-color: #d7ddea; }
 
 .login-page {
@@ -383,8 +416,6 @@ label.lg-label {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border: 1px solid white;
-  border-radius: 2px;
   color: black;
   background: white;
   width: 100%;
@@ -394,7 +425,7 @@ label.lg-label {
     /* Firefox 18- */
     height: 50px;
     font-size: 18px;
-    font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box; }
     .login-page form input:not([type=checkbox]) ::-webkit-input-placeholder {
       color: #7f8999; }
@@ -410,7 +441,7 @@ label.lg-label {
 .registration form input:not([type=checkbox]) {
   /* Firefox 19+ */
   /* Firefox 18- */
-  font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+  font-family: "OrbitronMed", Helvetica, Arial, sans-serif;
   box-sizing: border-box; }
   .registration form input:not([type=checkbox]) ::-webkit-input-placeholder {
     color: #7f8999; }
@@ -473,7 +504,7 @@ label.lg-label {
   .settings fieldset legend {
     padding: 0 15px;
     color: #cf4646;
-    font-family: "MyriadProRegular", Helvetica, Arial, sans-serif;
+    font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
     font-size: 20px; }
 
 .upload-file {
@@ -524,6 +555,21 @@ label.lg-label {
     -webkit-transition: width 0.6s ease;
     -o-transition: width 0.6s ease;
     transition: width 0.6s ease; }
+
+.table-striped {
+  width: 100%;
+  border: none;
+  border-collapse: collapse; }
+  .table-striped tr:nth-child(odd) {
+    background-color: #fff; }
+  .table-striped tr:nth-child(even) {
+    background-color: #d7ddea; }
+  .table-striped td, .table-striped th {
+    border: none;
+    padding: 16px 8px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle; }
 
 @media (min-width: 768px) {
   .col-sm-1 {

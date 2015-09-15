@@ -21,15 +21,32 @@ class AccountController extends Controller
 
     public function index()
     {
+        $data = AccountModel::getUserFiles();
+        $this->View->render('account/files', $data);
+    }
 
-        $this->View->render('account/index');
+    public function files()
+    {
+        $data = AccountModel::getUserFiles();
+        $this->View->render('account/files', $data);
     }
 
     public function settings()
     {
-        $data = AccountModel::getPublicInfo();
+        $data = AccountModel::getUserInfo();
         $this->View->render('account/settings', $data);
     }
+
+    public function upload()
+    {
+        $this->View->render('account/upload');
+    }
+
+    public function bookmarks()
+    {
+        $this->View->render('account/files');
+    }
+
 
     public function saveUsername()
     {
@@ -89,25 +106,44 @@ class AccountController extends Controller
     public function ajaxUpload()
     {
 //        var_dump(($_FILES["fileToUpload"]));
-        $target_dir = BASE_PATH . "uploads/" . Session::get('user_id') . '/';
-        if (!file_exists($target_dir)) {
-            mkdir($target_dir, 0777, true);
+        $user_dir = "uploads/" . Session::get('user_id') . '/';
+        $local_dir = BASE_PATH . $user_dir;
+        if (!file_exists($local_dir)) {
+            mkdir($local_dir, 0777, true);
         }
 
         $fileBasename = basename($_FILES['fileToUpload']['name']);
         $ext = explode('.', $fileBasename);
-        $target_path = $target_dir . md5(uniqid()) . "." . $ext[count($ext) - 1];
+        var_dump($ext);
+        $file_name =  md5(uniqid()) . "." . $ext[count($ext) - 1];
+        $local_path = $local_dir . $file_name;
+        $public_path = Config::get('URL') . '/' . $user_dir . $file_name;
 
         if ($_FILES["fileToUpload"]["size"] > 100 * 1024 * 1024) {
             echo "Sorry, file " . $fileBasename . " is too large.";
             return;
         }
 
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_path)) {
-            echo $fileBasename . " has been uploaded successfully.\n";
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $local_path)) {
+            if (AccountModel::addUserFile($public_path, $fileBasename))
+                echo $fileBasename;// . " has been uploaded successfully.\n";
+            else
+                echo "N";
         } else {
-            echo "There was an error uploading " . $fileBasename . ", please try again..";
+            echo 'N';
+//            echo "There was an error uploading " . $fileBasename . ", please try again..";
         }
 
+    }
+
+    public static function checkPage($page)
+    {
+        if(Request::get_get('url') == NULL){
+            return false;
+        }
+        $url = trim(Request::get_get('url'), '/');
+        $url = filter_var($url, FILTER_SANITIZE_URL);
+        $url = explode('/', $url);
+        return ($url[1] === $page) ? true: false;
     }
 }

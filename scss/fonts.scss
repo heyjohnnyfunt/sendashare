@@ -2,6 +2,38 @@
 @import "local-paths";
 
 @font-face {
+  font-family: "Pacifico";
+  src: url($fonts_path + "Pacifico/Pacifico.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Orbitron";
+  src: url($fonts_path + "Orbitron/Orbitron-Regular.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "OrbitronBold";
+  src: url($fonts_path + "Orbitron/Orbitron-Bold.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "OrbitronMed";
+  src: url($fonts_path + "Orbitron/Orbitron-Medium.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Gloria";
+  src: url($fonts_path + "Gloria/GloriaHallelujah.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+/*
+
+@font-face {
   font-family: "MyriadProRegular";
   src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot");
   src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
@@ -11,7 +43,7 @@
   font-weight: normal;
 }
 
-/* font-family: "MyriadProBold"; */
+/!* font-family: "MyriadProBold"; *!/
 @font-face {
   font-family: "MyriadProBold";
   src: url($fonts_path + "MyriadProBold/MyriadProBold.eot");
@@ -22,28 +54,7 @@
   font-weight: normal;
 }
 
-/* font-family: "PFSquareSansProMedium"; */
-@font-face {
-  font-family: "PFSquareSansProMedium";
-  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.eot");
-  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.eot?#iefix")format("embedded-opentype"),
-  url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.woff") format("woff"),
-  url($fonts_path + "PFSquareSansProMedium/PFSquareSansProMedium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-
-/* font-family: "PFSquareSansProLight"; */
-@font-face {
-  font-family: "PFSquareSansProLight";
-  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProLight.ttf");
-  src: url($fonts_path + "PFSquareSansProMedium/PFSquareSansProLight.ttf?#iefix") format("embedded-opentype"),
-  url($fonts_path + "PFSquareSansProMedium/PFSquareSansProLight.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-
-/* font-family: "MyriadProLight"; */
+/!* font-family: "MyriadProLight"; *!/
 @font-face {
   font-family: "MyriadProLight";
   src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf");
@@ -52,4 +63,4 @@
   url($fonts_path + "MyriadProRegular/MyriadProLight.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
-}
+}*/

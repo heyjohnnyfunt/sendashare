@@ -1,0 +1,8 @@
+CREATE TABLE sendashare.files
+(
+  file_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  user_id INT,
+  file_path VARCHAR(500),
+  file_name VARCHAR(200),
+  date_created DATETIME
+);

@@ -7,10 +7,11 @@
  * Time: 20:59
  */
 require_once 'UserModel.php';
+require_once 'FileModel.php';
 
 class AccountModel
 {
-    public static function getPublicInfo()
+    public static function getUserInfo()
     {
         if (!$userInfo = UserModel::getCurrentUser()) {
             return array('error_message' => Message::get('DB_ERROR'));
@@ -158,5 +159,31 @@ class AccountModel
 
         Session::set('user_email', $password);
         return true;
+    }
+
+    public static function addUserFile($filePath, $fileName)
+    {
+        $db = Database::getDb()->connect();
+        if ($query = $db->prepare('
+              INSERT INTO
+                files
+                (user_id, file_path, file_name, date_created)
+              VALUES
+                (?,?,?,?)')
+        ) {
+            $query->bind_param('ssss', Session::get('user_id'), $filePath, $fileName, date('Y-m-d H:i:s'));
+            if ($query->execute())
+                return true;
+        }
+
+        return false;
+    }
+
+    public static function getUserFiles()
+    {
+        if (!$fileInfo = FileModel::getUserFiles()) {
+            return array('error_message' => Message::get('DB_ERROR'));
+        }
+        return $fileInfo;
     }
 }

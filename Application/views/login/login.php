@@ -6,7 +6,10 @@
  * Time: 22:06
  */ ?>
 <div class="login-page col-sm-6">
-    <h1>SendaShare</h1>
+    <a href="<?php echo Config::get('URL'); ?>/">
+        <h1>SendaShare</h1>
+    </a>
+
 
     <noscript>
         <p class="error">ATENSION! This page won't work properly without enabled JavaScript. Your password will be

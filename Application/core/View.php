@@ -18,7 +18,6 @@ class View
                 $this->{$key} = $value;
             }
         }
-//        require Config::get('VIEWS_PATH') . 'templates/base.php';
         require Config::get('VIEWS_PATH') . 'templates/header.php';
         require Config::get('VIEWS_PATH') . $filename . '.php';
         require Config::get('VIEWS_PATH') . 'templates/footer.php';
