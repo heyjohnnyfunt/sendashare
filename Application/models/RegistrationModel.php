@@ -40,7 +40,6 @@ class RegistrationModel
             'password' => $password,
             'conf_password' => $conf_password
         );
-
     }
 
     private static function validation($field_array)
@@ -56,7 +55,6 @@ class RegistrationModel
         }
 
         if (UserModel::ifExists('username', $username) OR UserModel::ifExists('email', $email)){
-            var_dump($field_array);
             return false;
         }
 

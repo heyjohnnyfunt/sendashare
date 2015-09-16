@@ -17,7 +17,8 @@ var css_files = [
 ];
 
 var js_files = [
-    config.bower + 'jquery/dist/jquery.js'
+    config.bower + 'jquery/dist/jquery.js',
+    config.bower + 'travist/jsencrypt/bin/jsencrypt.min.js'
 ];
 
 var css_output_path = config.css;

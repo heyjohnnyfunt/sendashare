@@ -2,26 +2,14 @@
 @import "local-paths";
 
 @font-face {
+  font-family: "Architects";
+  src: url($fonts_path + "Architects/ArchitectsDaughter.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
   font-family: "Pacifico";
   src: url($fonts_path + "Pacifico/Pacifico.ttf");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Orbitron";
-  src: url($fonts_path + "Orbitron/Orbitron-Regular.ttf");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "OrbitronBold";
-  src: url($fonts_path + "Orbitron/Orbitron-Bold.ttf");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "OrbitronMed";
-  src: url($fonts_path + "Orbitron/Orbitron-Medium.ttf");
   font-style: normal;
   font-weight: normal;
 }
@@ -31,36 +19,46 @@
   font-style: normal;
   font-weight: normal;
 }
-/*
-
 @font-face {
-  font-family: "MyriadProRegular";
-  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot");
-  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
-  url($fonts_path + "MyriadProRegular/MyriadProRegular.woff") format("woff"),
-  url($fonts_path + "MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+  font-family: "Inconsolata";
+  src: url($fonts_path + "Inconsolata/Inconsolata-Regular.ttf");
   font-style: normal;
   font-weight: normal;
 }
-
-/!* font-family: "MyriadProBold"; *!/
 @font-face {
-  font-family: "MyriadProBold";
-  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot");
-  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot?#iefix")format("embedded-opentype"),
-  url($fonts_path + "MyriadProBold/MyriadProBold.woff") format("woff"),
-  url($fonts_path + "MyriadProBold/MyriadProBold.ttf") format("truetype");
+  font-family: "Inconsolata";
+  src: url($fonts_path + "Inconsolata/Inconsolata-Bold.ttf");
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url($fonts_path + "Roboto/Roboto-Regular.ttf");
   font-style: normal;
   font-weight: normal;
 }
-
-/!* font-family: "MyriadProLight"; *!/
 @font-face {
-  font-family: "MyriadProLight";
-  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf");
-  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf?#iefix")format("embedded-opentype"),
-  url($fonts_path + "MyriadProRegular/MyriadProLight.otf") format("otf"),
-  url($fonts_path + "MyriadProRegular/MyriadProLight.ttf") format("truetype");
+  font-family: "Roboto";
+  src: url($fonts_path + "Roboto/Roboto-Thin.ttf");
   font-style: normal;
-  font-weight: normal;
-}*/
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url($fonts_path + "Roboto/Roboto-Light.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url($fonts_path + "Roboto/Roboto-Medium.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url($fonts_path + "Roboto/Roboto-Bold.ttf");
+  font-style: normal;
+  font-weight: bold;
+}
+

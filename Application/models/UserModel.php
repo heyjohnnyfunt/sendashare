@@ -85,13 +85,9 @@ class UserModel
         return true;
     }
 
-
     public static function addUser($fields)
     {
         extract($fields);
-
-//        if(empty($firstname)) $firstname = 'NULL';
-//        if(empty($lastname)) $lastname = 'NULL';
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -100,11 +96,11 @@ class UserModel
         if ($query = $db->prepare('
               INSERT INTO
                 users
-                (username, password, firstname, lastname, email)
+                (username, password, firstname, lastname, email, salt)
               VALUES
-                (?,?,?,?,?)')
+                (?,?,?,?,?,?)')
         ) {
-            $query->bind_param('sssss', $username, $password, $firstname, $lastname, $email);
+            $query->bind_param('ssssss', $username, $password, $firstname, $lastname, $email, $salt);
             if ($query->execute())
                 return true;
         }

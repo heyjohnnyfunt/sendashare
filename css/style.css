@@ -1,26 +1,14 @@
 @charset "UTF-8";
 /* font-family: "MyriadProRegular"; */
 @font-face {
+  font-family: "Architects";
+  src: url("/fonts/Architects/ArchitectsDaughter.ttf");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
   font-family: "Pacifico";
   src: url("/fonts/Pacifico/Pacifico.ttf");
-  font-style: normal;
-  font-weight: normal; }
-
-@font-face {
-  font-family: "Orbitron";
-  src: url("/fonts/Orbitron/Orbitron-Regular.ttf");
-  font-style: normal;
-  font-weight: normal; }
-
-@font-face {
-  font-family: "OrbitronBold";
-  src: url("/fonts/Orbitron/Orbitron-Bold.ttf");
-  font-style: normal;
-  font-weight: normal; }
-
-@font-face {
-  font-family: "OrbitronMed";
-  src: url("/fonts/Orbitron/Orbitron-Medium.ttf");
   font-style: normal;
   font-weight: normal; }
 
@@ -30,39 +18,48 @@
   font-style: normal;
   font-weight: normal; }
 
-/*
+@font-face {
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata/Inconsolata-Regular.ttf");
+  font-style: normal;
+  font-weight: normal; }
 
 @font-face {
-  font-family: "MyriadProRegular";
-  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot");
-  src: url($fonts_path + "MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
-  url($fonts_path + "MyriadProRegular/MyriadProRegular.woff") format("woff"),
-  url($fonts_path + "MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata/Inconsolata-Bold.ttf");
   font-style: normal;
-  font-weight: normal;
-}
+  font-weight: bold; }
 
-/!* font-family: "MyriadProBold"; *!/
 @font-face {
-  font-family: "MyriadProBold";
-  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot");
-  src: url($fonts_path + "MyriadProBold/MyriadProBold.eot?#iefix")format("embedded-opentype"),
-  url($fonts_path + "MyriadProBold/MyriadProBold.woff") format("woff"),
-  url($fonts_path + "MyriadProBold/MyriadProBold.ttf") format("truetype");
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Regular.ttf");
   font-style: normal;
-  font-weight: normal;
-}
+  font-weight: normal; }
 
-/!* font-family: "MyriadProLight"; *!/
 @font-face {
-  font-family: "MyriadProLight";
-  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf");
-  src: url($fonts_path + "MyriadProRegular/MyriadProLight.ttf?#iefix")format("embedded-opentype"),
-  url($fonts_path + "MyriadProRegular/MyriadProLight.otf") format("otf"),
-  url($fonts_path + "MyriadProRegular/MyriadProLight.ttf") format("truetype");
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Thin.ttf");
   font-style: normal;
-  font-weight: normal;
-}*/
+  font-weight: 100; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Light.ttf");
+  font-style: normal;
+  font-weight: 300; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Medium.ttf");
+  font-style: normal;
+  font-weight: 500; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Bold.ttf");
+  font-style: normal;
+  font-weight: bold; }
+
 .row {
   margin-left: -12px;
   margin-right: -12px; }
@@ -275,7 +272,7 @@ input[type=checkbox] {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
+    top: 5px;
     width: 15px;
     height: 15px;
     border: 1px solid #9a9a9a;
@@ -309,7 +306,7 @@ input[type=checkbox] {
 
 html {
   -webkit-font-smoothing: antialiased;
-  font-family: Helvetica, Tahoma, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Tahoma, Arial, sans-serif;
   height: 100%; }
 
 body {
@@ -355,7 +352,8 @@ a {
 
 .error {
   color: red;
-  font-family: "OrbitronBold", Helvetica, Arial, sans-serif; }
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500; }
 
 .error-input {
   background-color: #e9abab; }
@@ -365,7 +363,8 @@ a {
 
 .good {
   color: green;
-  font-family: "OrbitronBold", Helvetica, Arial, sans-serif; }
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500; }
 
 .logo {
   display: inline-block;
@@ -375,8 +374,10 @@ a {
     margin: 0; }
 
 label.lg-label {
-  font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
-  margin-top: 5px; }
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  margin-top: 5px;
+  font-size: 17px; }
 
 .navbar .nav {
   display: inline-block;
@@ -388,7 +389,7 @@ label.lg-label {
     float: left;
     padding: 0 20px; }
     .navbar .nav li > a {
-      font-family: "Pacifico", Helvetica, Arial, sans-serif;
+      font-family: "Architects", Helvetica, Arial, sans-serif;
       font-size: 18px;
       display: block;
       line-height: 70px;
@@ -400,10 +401,13 @@ label.lg-label {
   list-style-type: none;
   padding: 0;
   margin: 0 0 20px -12px; }
+  .nav-left > li:not(:last-child) > a {
+    border-bottom: 1px solid #cf4646; }
   .nav-left > li > a {
     border-right: 15px solid #cf4646;
     font-size: 18px;
-    font-family: "Orbitron", Helvetica, Arial, sans-serif;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-weight: 300;
     display: block;
     padding: 10px; }
     .nav-left > li > a:hover, .nav-left > li > a.active {
@@ -425,7 +429,7 @@ label.lg-label {
     /* Firefox 18- */
     height: 50px;
     font-size: 18px;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Inconsolata', Helvetica, Arial, sans-serif;
     box-sizing: border-box; }
     .login-page form input:not([type=checkbox]) ::-webkit-input-placeholder {
       color: #7f8999; }
@@ -441,7 +445,7 @@ label.lg-label {
 .registration form input:not([type=checkbox]) {
   /* Firefox 19+ */
   /* Firefox 18- */
-  font-family: "OrbitronMed", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   box-sizing: border-box; }
   .registration form input:not([type=checkbox]) ::-webkit-input-placeholder {
     color: #7f8999; }
@@ -455,17 +459,18 @@ label.lg-label {
 .registration form button {
   font-size: 22px; }
 
-.form-loader-icon {
-  display: none;
+.form-loader-icon, .form-hint {
   position: absolute;
-  top: 50%;
   transform: translateY(-50%);
-  right: 3px; }
+  top: 50%; }
+  .form-loader-icon.resp, .form-hint.resp {
+    top: 73%; }
+
+.form-loader-icon {
+  right: 3px;
+  display: none; }
 
 .form-hint {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   right: 5px;
   margin: 0; }
 
@@ -504,7 +509,8 @@ label.lg-label {
   .settings fieldset legend {
     padding: 0 15px;
     color: #cf4646;
-    font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
+    font-family: "Inconsolata", Helvetica, Arial, sans-serif;
+    font-weight: bold;
     font-size: 20px; }
 
 .upload-file {
@@ -516,7 +522,8 @@ label.lg-label {
     background-color: #f9f9f9;
     min-height: inherit;
     position: relative;
-    text-align: center; }
+    text-align: center;
+    font-family: 'Gloria', Helvetica, Arial, sans-serif; }
     .upload-file .upload-inner span {
       position: absolute;
       left: 50%;
@@ -559,7 +566,8 @@ label.lg-label {
 .table-striped {
   width: 100%;
   border: none;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  font-family: 'Inconsolata', Helvetica, Arial, sans-serif; }
   .table-striped tr:nth-child(odd) {
     background-color: #fff; }
   .table-striped tr:nth-child(even) {
@@ -634,4 +642,8 @@ label.lg-label {
     float: left; }
   .registration {
     width: 70%;
-    margin: auto; } }
+    margin: auto; }
+  .form-loader-icon.resp, .form-hint.resp {
+    top: 50%; }
+  .nav-left li:not(:last-child) > a {
+    border-bottom: none; } }

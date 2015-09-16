@@ -49,3 +49,14 @@ $rows: 12;
   width: 70%;
   margin: auto;
 }
+
+.form-loader-icon, .form-hint {
+  &.resp {
+    top: 50%;
+  }
+}
+.nav-left{
+  li:not(:last-child) > a {
+    border-bottom: none;
+  }
+}

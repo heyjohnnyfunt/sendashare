@@ -15,3 +15,4 @@ ALTER TABLE sendashare.users MODIFY COLUMN last_login TIMESTAMP NULL;
 ALTER TABLE sendashare.users ADD failed_login_count INT DEFAULT 0 NULL;
 ALTER TABLE sendashare.users MODIFY COLUMN last_failed_login  int(10) DEFAULT NULL COMMENT 'unix timestamp of last failed login attempt';
 ALTER TABLE sendashare.users ADD remember_me_token VARCHAR(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s remember-me cookie token';
+ALTER TABLE sendashare.users ADD salt VARCHAR(200) NOT NULL;

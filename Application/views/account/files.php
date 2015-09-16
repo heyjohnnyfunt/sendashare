@@ -3,7 +3,7 @@
 <?php if (!empty($this->error_message)) { ?>
     <p class="error"><?= $this->error_message ?><br/>
         Please, <a type="button" href="<?php echo Config::get('URL'); ?>/login/logout"
-                   class="btn btn-danger">Logout</a>
+                   class="btn btn-danger btn-sm">Logout</a>
     </p>
 <?php } ?>
 

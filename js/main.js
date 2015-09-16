@@ -16,9 +16,9 @@ function Login() {
     this.formControl = function () {
         login();
         registration();
-        ajaxCheckTemplate('login', 'username');
-        ajaxCheckTemplate('registration', 'username');
-        ajaxCheckTemplate('registration', 'email');
+        checkInput('login', 'username');
+        checkInput('registration', 'username');
+        checkInput('registration', 'email');
     };
 
     var $login = $('#login');
@@ -35,34 +35,49 @@ function Login() {
                 $p = $('<p/>').addClass('pull-left error').insertAfter($login);
             $p.hide();
 
-            var data = validateLoginInput();
-            if (data === false) {
+            var userdata = validateLoginInput();
+            if (!userdata) {
                 $p.html('Check your input').show();
                 return;
             }
-
-            var $loader = Helper.insertBigLoader();
+            console.log(userdata);
 
             $.ajax({
                 method: 'POST',
-                url: window.location.protocol + '//' + window.location.host + '/login/ajaxLogin',
-                data: data,
-                beforeSend: function () {
-                    $loader.fadeIn();
-                },
-                success: function (data) {
-                    if (data == 'N') {
-                        $p.html('Invalid username/email or password').show();
-                    } else window.location.href = data;
-                },
-                error: function () {
-                    $p.html('Check your Internet connection').show();
-                },
-                complete: function () {
-                    $loader.fadeOut();
+                url: window.location.protocol + '//' + window.location.host + '/login/ajaxSalt',
+                data: {'username' : userdata.username},
+                success: function(data){
+                    var salt = data;
+                    var encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(salt);
+
+                    userdata.password = encrypt.encrypt(userdata.password);
+
+                    var $loader = Helper.insertBigLoader();
+
+                    $.ajax({
+                        method: 'POST',
+                        url: window.location.protocol + '//' + window.location.host + '/login/ajaxLogin',
+                        data: userdata,
+                        beforeSend: function () {
+                            $loader.fadeIn();
+                        },
+                        success: function (data) {
+                            if (data == 'N') {
+                             $p.html('Invalid username/email or password').show();
+                             }  else if(data == 'NT'){
+                             $p.html('CSRF attacks are not allowed. Sorry :)').show();
+                             } else window.location.href = data;
+                        },
+                        error: function () {
+                            $p.html('Check your Internet connection').show();
+                        },
+                        complete: function () {
+                            $loader.fadeOut();
+                        }
+                    });
                 }
             });
-
         });
     }
 
@@ -98,7 +113,7 @@ function Login() {
                 success: function (data) {
                     if (data == 'N') {
                         $p.html('Registration failed. Check your input').show();
-                    } else window.location.href = data;
+                    }  else window.location.href = data;
                 },
                 error: function () {
                     $p.html('Check your Internet connection').show();
@@ -117,11 +132,18 @@ function Login() {
         var password = $login.find('input[name=password]').val();
         if (password.length < 6) return false;
 
+        var csrfToken = strip_tags($login.find('input[name=csrf_token]').val());
+        if (csrfToken.length !== 32) return false;
         var data = {
             username: username,
-            password: hex_sha256(password)
+            password: hex_sha256(password),
+            csrf_token: csrfToken
         };
+/*
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey(salt);
 
+ */
         var redirect = $login.find('input[name=redirect]');
         if (redirect.size() > 0) {
             data.redirect = redirect.val();
@@ -139,25 +161,18 @@ function Login() {
         var email = strip_tags($reg.find('input[name=email]').val());
         if (email.length < 6) return false;
 
-        /*var password = strip_tags($reg.find('input[name=password]').val());
-         if (password.length < 6) return false;
-
-         var confPass = strip_tags($reg.find('input[name=confPassword]').val());
-         if (password.length < 6) return false;
-
-         if (password !== confPass) return false;*/
+        /*var salt = strip_tags($reg.find('input[name=salt]').val());
+        if (salt.length !== 64) return false;*/
 
         var data = {
             username: username,
             email: email,
             firstname: strip_tags($reg.find('input[name=firstname]').val()),
             lastname: strip_tags($reg.find('input[name=lastname]').val())
-            /*password: hex_sha256(password),
-             confPassword: hex_sha256(confPass)*/
+            //salt: salt
         };
 
-        var passData = Helper.validatePass($reg.find('input[name=password]'), $reg.find('input[name=confPassword]'))
-
+        var passData = Helper.validatePass($reg.find('input[name=password]'), $reg.find('input[name=confPassword]'));
 
         if (passData === false) return false;
 
@@ -174,7 +189,7 @@ function Login() {
         return data;
     }
 
-    function ajaxCheckTemplate(formId, elementId) {
+    function checkInput(formId, elementId) {
         $('form#' + formId + ' #' + elementId).change(function () {
             var self = $(this);
             var selfId = self.attr('id');
@@ -193,6 +208,8 @@ function Login() {
                     fuckMsg = 'Username or email is not valid';
                     break;
                 case 'registration':
+                    $p.addClass('resp');
+                    $loader.addClass('resp');
                     if (elementId === 'username') {
                         ajaxPhp = 'checkUsernameReg';
                         fuckMsg = 'Choose another username';
@@ -239,6 +256,7 @@ function Login() {
     }
 }
 
+// Settings udate class
 function Settings() {
 
     this.set = function () {
@@ -363,6 +381,7 @@ function Settings() {
     }
 }
 
+// Validator static class
 var Validator = (function () {
 
     var compareVals = function (psw1, psw2) {
@@ -396,6 +415,7 @@ var Validator = (function () {
     }
 })();
 
+// Help functions static class
 var Helper = (function () {
 
     return {
@@ -430,6 +450,7 @@ function strip_tags(str) {
     return str.replace(/<\/?[^>]+>/gi, '');
 }
 
+// Drag & drop
 (function () {
 
     var form = $('#dropZone-form'),

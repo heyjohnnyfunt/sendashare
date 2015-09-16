@@ -30,24 +30,37 @@ class LoginController extends Controller
 
     public function login()
     {
+        if (!Csrf::isTokenValid()) {
+            self::logout();
+        }
+
         $login_successful = LoginModel::login(
             Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
         );
 
         if ($login_successful) {
             if ($redirect = Request::get_post('redirect')) {
-                 Redirect::toPath(ltrim(urldecode($redirect), '/'));
+                Redirect::toPath(ltrim(urldecode($redirect), '/'));
             } else {
-                 Redirect::toPath('account');
+                Redirect::toPath('account');
             }
         } else {
-             Redirect::toPath('login');
+            Redirect::toPath('login');
         }
     }
+
     public function ajaxLogin()
     {
+        if (!Csrf::isTokenValid()) {
+            LoginModel::logout();
+            echo 'NT';
+            return;
+        }
+
+        openssl_private_decrypt(base64_decode(Request::get_post('password')), $password, Session::get('RSA_private'));
+
         $login_successful = LoginModel::login(
-            Request::get_post('username'), Request::get_post('password'), Request::get_post('remember_me')
+            Request::get_post('username'), $password, Request::get_post('remember_me')
         );
 
         if ($login_successful) {
@@ -115,6 +128,17 @@ class LoginController extends Controller
     {
         if (RegistrationModel::checkUserEmail(Request::get_post('email'))) {
             echo 'Y';
+        } else echo 'N';
+    }
+
+    public function ajaxSalt()
+    {
+        $public_key = Csrf::generateKeys();
+        $data = 'plaintext data goes here';
+        openssl_public_encrypt($data, $encrypted, $public_key);
+        openssl_private_decrypt($encrypted, $decrypted, Session::get('RSA_private'));
+        if ($public_key !== false) {
+            var_dump($public_key);
         } else echo 'N';
     }
 

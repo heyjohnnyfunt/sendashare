@@ -1,6 +1,4 @@
-<?php
-
-/**
+<?php /**
  * Created by PhpStorm.
  * User: skogs
  * Date: 30.08.2015
@@ -9,19 +7,16 @@
 
 //namespace App;
 
-require_once('Config.php');
 require_once('Auth.php');
+require_once('Config.php');
 require_once('Controller.php');
+require_once('Csrf.php');
 require_once('Database.php');
 require_once('Message.php');
 require_once('Redirect.php');
 require_once('Request.php');
 require_once('Session.php');
 require_once('View.php');
-
-/*function __autoload($class){
-    require_once($class.'.php');
-}*/
 
 class Application
 {

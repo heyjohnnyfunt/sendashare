@@ -8,7 +8,7 @@
 
 html {
   -webkit-font-smoothing: antialiased;
-  font-family: Helvetica, Tahoma, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Tahoma, Arial, sans-serif;
   height: 100%;
 }
 
@@ -97,7 +97,8 @@ a {
 
 .error {
   color: red;
-  font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500;
 }
 
 .error-input {
@@ -110,7 +111,8 @@ a {
 
 .good {
   color: green;
-  font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500;
 }
 
 .logo {
@@ -123,8 +125,10 @@ a {
 }
 
 label.lg-label {
-  font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 500;
   margin-top: 5px;
+  font-size: 17px;
 }
 
 .navbar {
@@ -138,7 +142,7 @@ label.lg-label {
       float: left;
       padding: 0 20px;
       > a {
-        font-family: "Pacifico", Helvetica, Arial, sans-serif;
+        font-family: "Architects", Helvetica, Arial, sans-serif;
         font-size: $font-big;
         display: block;
         line-height: 70px;
@@ -156,10 +160,16 @@ label.lg-label {
   padding: 0;
   margin: 0 0 20px -12px;
   > li {
+    &:not(:last-child) {
+      > a {
+        border-bottom: 1px solid $red;
+      }
+    }
     > a {
       border-right: 15px solid $red;
       font-size: $font-big;
-      font-family: "Orbitron", Helvetica, Arial, sans-serif;
+      font-family: "Roboto", Helvetica, Arial, sans-serif;
+      font-weight: 300;
       display: block;
       padding: 10px;
       &:hover, &.active {
@@ -184,7 +194,7 @@ label.lg-label {
       @include placeholder-color($gray-light);
       height: 50px;
       font-size: 18px;
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: 'Inconsolata', Helvetica, Arial, sans-serif;
       box-sizing: border-box;
     }
 
@@ -200,7 +210,7 @@ label.lg-label {
 
     input:not([type=checkbox]) {
       @include placeholder-color($gray-light);
-      font-family: "OrbitronMed", Helvetica, Arial, sans-serif;
+      font-family: Helvetica, Arial, sans-serif;
       box-sizing: border-box;
     }
 
@@ -210,18 +220,21 @@ label.lg-label {
   }
 }
 
-.form-loader-icon {
-  display: none;
+.form-loader-icon, .form-hint {
   position: absolute;
-  top: 50%;
   transform: translateY(-50%);
+  top: 50%;
+  &.resp {
+    top: 73%;
+  }
+}
+
+.form-loader-icon {
   right: 3px;
+  display: none;
 }
 
 .form-hint {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   right: 5px;
   margin: 0;
 }
@@ -261,7 +274,8 @@ label.lg-label {
     legend {
       padding: 0 15px;
       color: $red;
-      font-family: "OrbitronBold", Helvetica, Arial, sans-serif;
+      font-family: "Inconsolata", Helvetica, Arial, sans-serif;
+      font-weight: bold;
       font-size: 20px;
     }
   }
@@ -277,6 +291,7 @@ label.lg-label {
     min-height: inherit;
     position: relative;
     text-align: center;
+    font-family: 'Gloria', Helvetica, Arial, sans-serif;
     span {
       @include centered(50%, 50%);
     }
@@ -326,6 +341,7 @@ label.lg-label {
   width: 100%;
   border: none;
   border-collapse: collapse;
+  font-family: 'Inconsolata', Helvetica, Arial, sans-serif;
   tr {
     //border-bottom: 1px solid $red-light;
     &:nth-child(odd) {

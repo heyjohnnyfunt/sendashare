@@ -34,7 +34,7 @@ class LoginModel
             self::resetLoginFail($result['username']);
         }
 
-        if($remember_me_cookie){
+        if ($remember_me_cookie) {
             self::rememberMe($result['id']);
         }
 
@@ -132,14 +132,15 @@ class LoginModel
 
         $db = Database::getDb()->connect();
 
-        if($query = $db->prepare("UPDATE
+        if ($query = $db->prepare("UPDATE
                 users
             SET
               remember_me_token = ?
             WHERE
               id = ?
             LIMIT 1
-        ")){
+        ")
+        ) {
             $query->bind_param('ss', $random_token, $user_id);
             $query->execute();
             if ($query->errno) {
@@ -151,17 +152,19 @@ class LoginModel
         }
 
         $cookie_string = $user_id . ':' . $random_token;
-        $cookie_string =  $cookie_string . ':' . hash('sha256', $cookie_string);
+        $cookie_string = $cookie_string . ':' . hash('sha256', $cookie_string);
         setcookie('remember_me', $cookie_string, time() + Config::get('COOKIE_EXPIRE'), Config::get('COOKIE_PATH'));
     }
 
-    private static function setSessionProperties($user_id, $username, $email){
+    private static function setSessionProperties($user_id, $username, $email)
+    {
         Session::set('user_id', $user_id);
         Session::set('user_name', $username);
         Session::set('user_email', $email);
     }
 
-    public static function checkUser($username){
+    public static function checkUser($username)
+    {
         if (UserModel::ifExists('username', strip_tags($username)) OR UserModel::ifExists('email', strip_tags($username)))
             return true;
         return false;

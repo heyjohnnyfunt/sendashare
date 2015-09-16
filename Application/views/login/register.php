@@ -55,6 +55,8 @@
                        placeholder="Repeat password" autocomplete="off" pattern="{6,}" required>
             </div>
 
+<!--            <input type="hidden" name="salt" value="--><?//= Csrf::makeToken();?><!--">-->
+
             <button type="submit" class="btn btn-danger pull-right">Register</button>
         </form>
 

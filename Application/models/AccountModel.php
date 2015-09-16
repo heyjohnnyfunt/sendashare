@@ -186,4 +186,9 @@ class AccountModel
         }
         return $fileInfo;
     }
+
+    public static function getUserBookmarks()
+    {
+
+    }
 }
