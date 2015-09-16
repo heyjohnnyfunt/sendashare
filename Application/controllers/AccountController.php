@@ -44,9 +44,18 @@ class AccountController extends Controller
 
     public function bookmarks()
     {
-        $this->View->render('account/files');
+        $data = AccountModel::getUserBookmarks();
+        $this->View->render('account/bookmarks', $data);
     }
 
+    public function addBookmark()
+    {
+        if (!AccountModel::addUserBookmark(Request::get_post('link'))) {
+            echo 'N';
+        } else {
+            echo 'Y';
+        }
+    }
 
     public function saveUsername()
     {
@@ -115,7 +124,7 @@ class AccountController extends Controller
         $fileBasename = basename($_FILES['fileToUpload']['name']);
         $ext = explode('.', $fileBasename);
         var_dump($ext);
-        $file_name =  md5(uniqid()) . "." . $ext[count($ext) - 1];
+        $file_name = md5(uniqid()) . "." . $ext[count($ext) - 1];
         $local_path = $local_dir . $file_name;
         $public_path = Config::get('URL') . '/' . $user_dir . $file_name;
 
@@ -138,12 +147,12 @@ class AccountController extends Controller
 
     public static function checkPage($page)
     {
-        if(Request::get_get('url') == NULL){
+        if (Request::get_get('url') == NULL) {
             return false;
         }
         $url = trim(Request::get_get('url'), '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
         $url = explode('/', $url);
-        return ($url[1] === $page) ? true: false;
+        return ($url[1] === $page) ? true : false;
     }
 }

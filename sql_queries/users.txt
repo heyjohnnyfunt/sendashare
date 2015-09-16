@@ -6,11 +6,9 @@ CREATE TABLE sendashare.users
   firstname VARCHAR(200) NOT NULL,
   lastname VARCHAR(200) NOT NULL,
   email VARCHAR(300) NOT NULL,
-  birthday DATE NOT NULL,
   last_login TIMESTAMP NOT NULL
 );
 ALTER TABLE users ADD CONSTRAINT unique_id UNIQUE (id);
-ALTER TABLE users MODIFY COLUMN birthday DATE NULL;
 ALTER TABLE sendashare.users MODIFY COLUMN last_login TIMESTAMP NULL;
 ALTER TABLE sendashare.users ADD failed_login_count INT DEFAULT 0 NULL;
 ALTER TABLE sendashare.users MODIFY COLUMN last_failed_login  int(10) DEFAULT NULL COMMENT 'unix timestamp of last failed login attempt';

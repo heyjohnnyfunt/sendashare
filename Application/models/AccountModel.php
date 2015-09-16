@@ -163,6 +163,9 @@ class AccountModel
 
     public static function addUserFile($filePath, $fileName)
     {
+        $filePath = strip_tags($filePath);
+        $fileName = strip_tags($fileName);
+
         $db = Database::getDb()->connect();
         if ($query = $db->prepare('
               INSERT INTO
@@ -181,14 +184,30 @@ class AccountModel
 
     public static function getUserFiles()
     {
-        if (!$fileInfo = FileModel::getUserFiles()) {
+        if (!$fileInfo = FileModel::getFiles(Session::get('user_id'))) {
             return array('error_message' => Message::get('DB_ERROR'));
         }
         return $fileInfo;
     }
 
+    // Bookmarks
+
     public static function getUserBookmarks()
     {
+        if (!$fileInfo = FileModel::getBookmarks(Session::get('user_id'))) {
+            return array('error_message' => Message::get('DB_ERROR'));
+        }
+        return $fileInfo;
+    }
 
+    public static function addUserBookmark($link)
+    {
+        $file_id = FileModel::getFileIdByLink(strip_tags($link));
+
+        if(is_int($file_id) && FileModel::checkBookmark($file_id)){
+            return FileModel::addBookmark($file_id);
+        }
+
+        return false;
     }
 }

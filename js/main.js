@@ -3,6 +3,8 @@
  */
 $(document).ready(main);
 
+var BaseUrl = window.location.protocol + '//' + window.location.host;
+
 function main() {
 
     new Login().formControl();
@@ -44,9 +46,9 @@ function Login() {
 
             $.ajax({
                 method: 'POST',
-                url: window.location.protocol + '//' + window.location.host + '/login/ajaxSalt',
-                data: {'username' : userdata.username},
-                success: function(data){
+                url: BaseUrl + '/login/ajaxSalt',
+                data: {'username': userdata.username},
+                success: function (data) {
                     var salt = data;
                     var encrypt = new JSEncrypt();
                     encrypt.setPublicKey(salt);
@@ -57,17 +59,17 @@ function Login() {
 
                     $.ajax({
                         method: 'POST',
-                        url: window.location.protocol + '//' + window.location.host + '/login/ajaxLogin',
+                        url: BaseUrl + '/login/ajaxLogin',
                         data: userdata,
                         beforeSend: function () {
                             $loader.fadeIn();
                         },
                         success: function (data) {
                             if (data == 'N') {
-                             $p.html('Invalid username/email or password').show();
-                             }  else if(data == 'NT'){
-                             $p.html('CSRF attacks are not allowed. Sorry :)').show();
-                             } else window.location.href = data;
+                                $p.html('Invalid username/email or password').show();
+                            } else if (data == 'NT') {
+                                $p.html('CSRF attacks are not allowed. Sorry :)').show();
+                            } else window.location.href = data;
                         },
                         error: function () {
                             $p.html('Check your Internet connection').show();
@@ -113,7 +115,7 @@ function Login() {
                 success: function (data) {
                     if (data == 'N') {
                         $p.html('Registration failed. Check your input').show();
-                    }  else window.location.href = data;
+                    } else window.location.href = data;
                 },
                 error: function () {
                     $p.html('Check your Internet connection').show();
@@ -139,11 +141,11 @@ function Login() {
             password: hex_sha256(password),
             csrf_token: csrfToken
         };
-/*
-        var encrypt = new JSEncrypt();
-        encrypt.setPublicKey(salt);
+        /*
+         var encrypt = new JSEncrypt();
+         encrypt.setPublicKey(salt);
 
- */
+         */
         var redirect = $login.find('input[name=redirect]');
         if (redirect.size() > 0) {
             data.redirect = redirect.val();
@@ -162,7 +164,7 @@ function Login() {
         if (email.length < 6) return false;
 
         /*var salt = strip_tags($reg.find('input[name=salt]').val());
-        if (salt.length !== 64) return false;*/
+         if (salt.length !== 64) return false;*/
 
         var data = {
             username: username,
@@ -309,7 +311,7 @@ function Settings() {
 
             $.ajax({
                 type: 'POST',
-                url: window.location.protocol + '//' + window.location.host + '/account/' + ajaxPhp,
+                url: BaseUrl + '/account/' + ajaxPhp,
                 data: data,
                 success: function (data) {
                     $loader.hide();
@@ -356,7 +358,7 @@ function Settings() {
             //var data = pass.attr('id') + '=' + pass.val();
             $.ajax({
                 method: 'POST',
-                url: window.location.protocol + '//' + window.location.host + '/account/changePassword',
+                url: BaseUrl + '/account/changePassword',
                 data: data,
                 beforeSend: function () {
                     $loader.fadeIn();
@@ -453,7 +455,7 @@ function strip_tags(str) {
 // Drag & drop
 (function () {
 
-    var form = $('#dropZone-form'),
+    var form = $('form#dropZone-form'),
         fileList = form.siblings('#files');
 
     var dropZone = $('form > #dropZone'),
@@ -469,7 +471,7 @@ function strip_tags(str) {
         //formData.append("fileToUpload", file_data);
         $.ajax({
             method: 'POST',
-            url: window.location.protocol + '//' + window.location.host + '/account/ajaxUpload',
+            url: BaseUrl + '/account/ajaxUpload',
             //dataType: 'script',
             cache: false,
             contentType: false,
@@ -575,7 +577,7 @@ function strip_tags(str) {
                     return xhr;
                 },
                 method: 'POST',
-                url: window.location.protocol + '//' + window.location.host + '/account/ajaxUpload',
+                url: BaseUrl + '/account/ajaxUpload',
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -612,4 +614,44 @@ function strip_tags(str) {
         }).appendTo(dropZone);
     }
 
+})();
+
+// Add bookmark
+(function () {
+    var $form = $('form#addBookmark');
+
+    $form.on('click', '[type=submit]', function (event) {
+        event.preventDefault();
+
+        var data = $form.find('input[name=link]').attr('name') + '='
+            + strip_tags($form.find('input[name=link]').val());
+
+        var $p = $form.children('p');
+        if ($p.size() < 1)
+            $p = $('<p/>').appendTo($form);
+        $p.hide();
+
+        $.ajax({
+            method: 'POST',
+            url: BaseUrl + '/account/addBookmark',
+            data: data,
+            success: function (data) {
+                console.log(data);
+                $p.show();
+                if(data === 'N'){
+                    $p.removeClass('good').addClass('error').html('You already have such bookmark ' +
+                        'or link is invalid');
+                } else if (data === 'Y'){
+                    $p.removeClass('error').addClass('good').html('Bookmark was added').fadeOut(6000);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            },
+            complete: function () {
+                var fileInput = $("#fileToUpload");
+                fileInput.replaceWith(fileInput.clone(true));
+            }
+        });
+    });
 })();
