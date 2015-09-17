@@ -96,11 +96,11 @@ class UserModel
         if ($query = $db->prepare('
               INSERT INTO
                 users
-                (username, password, firstname, lastname, email, salt)
+                (username, password, firstname, lastname, email)
               VALUES
-                (?,?,?,?,?,?)')
+                (?,?,?,?,?)')
         ) {
-            $query->bind_param('ssssss', $username, $password, $firstname, $lastname, $email, $salt);
+            $query->bind_param('sssss', $username, $password, $firstname, $lastname, $email);
             if ($query->execute())
                 return true;
         }

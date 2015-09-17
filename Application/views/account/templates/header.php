@@ -20,9 +20,9 @@
                 <li>
                     <a href="<?php echo Config::get('URL'); ?>/account/files" <? if (AccountController::checkPage('files')) echo 'class="active"' ?>>My
                         files</a></li>
-               <!-- <li>
-                    <a href="<?php /*echo Config::get('URL'); */?>/account/bookmarks" <?/* if (AccountController::checkPage('bookmarks')) echo 'class="active"' */?>>Bookmarks</a>
-                </li>-->
+                <li>
+                    <a href="<?php echo Config::get('URL'); ?>/account/bookmarks" <? if (AccountController::checkPage('bookmarks')) echo 'class="active"' ?>>Bookmarks</a>
+                </li>
             </ul>
         </div>
         <div class="col-sm-9">

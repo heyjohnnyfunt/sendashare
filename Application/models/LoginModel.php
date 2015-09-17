@@ -68,10 +68,10 @@ class LoginModel
             return false;
         }
 
-        if ($result['active_user'] != 1) {
+        /*if ($result['active_user'] != 1) {
             Session::add(Message::get('LOGIN_FAILED'), Message::get('ACCOUNT_NOT_ACTIVATED'));
             return false;
-        }
+        }*/
 
         if (!password_verify($password, $result['password'])) {
             self::incrementLoginFail($result['username']);

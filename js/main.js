@@ -42,7 +42,6 @@ function Login() {
                 $p.html('Check your input').show();
                 return;
             }
-            console.log(userdata);
 
             $.ajax({
                 method: 'POST',
